@@ -25,6 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Vaxo Janiashvili | PORTFOLIO</title>
+        <link
+          rel="shortcut icon"
+          href="https://cdn-icons-png.flaticon.com/512/1096/1096090.png"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
