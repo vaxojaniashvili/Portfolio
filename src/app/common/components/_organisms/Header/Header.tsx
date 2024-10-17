@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="w-full bg-white  xl:h-[80px] h-[65px] flex items-center justify-between px-[30px] sm:px-5 md:px-10 lg:px-20">
+      <div className="w-full bg-white fixed  xl:h-[80px] h-[65px] flex items-center justify-between px-[30px] sm:px-5 md:px-10 lg:px-20">
         <div className="flex items-center gap-3 xl:gap-4">
           <Image
             width={40}
@@ -19,7 +19,7 @@ const Header = () => {
           />
           <h1 className="font-body text-[14px] font-bold">VAXO JANIASHVILI</h1>
         </div>
-        <div className="hidden sm:flex gap-[30px] font-body font-bold text-[#333]">
+        <div className="md:flex hidden gap-[30px] font-body font-bold text-[#333]">
           <button className="hover:text-[#7843E9]">HOME</button>
           <button className="hover:text-[#7843E9]">ABOUT</button>
           <button className="hover:text-[#7843E9]">PROJECTS</button>
@@ -29,7 +29,7 @@ const Header = () => {
           onClick={() => {
             setPopUp(!popUp);
           }}
-          className="sm:hidden"
+          className="md:hidden"
         >
           <BurgerMenu className="w-[24px] h-[24px] lg:w-[30px] lg:h-[30px]" />
         </div>
