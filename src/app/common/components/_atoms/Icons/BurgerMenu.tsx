@@ -1,3 +1,5 @@
+import { BurgerMenuProps } from "@/app/common/types/common";
+
 const BurgerMenu = ({ width, height, className }: BurgerMenuProps) => {
   return (
     <svg
