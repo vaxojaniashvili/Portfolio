@@ -11,6 +11,9 @@ const config: Config = {
       fontFamily: {
         body: ["Protest Strike", "sans-serif"],
       },
+      backgroundImage: {
+        mainBg: "url(/assets/Background.svg)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
