@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import BurgerMenu from "../../_atoms/Icons/BurgerMenu";
+import { useState } from "react";
 import Image from "next/image";
+import BurgerMenu from "../../_atoms/Icons/BurgerMenu";
 
 const Header = () => {
   const [popUp, setPopUp] = useState(false);
