@@ -6,9 +6,9 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full h-[500px] md:h-screen relative">
       <div className="flex justify-start w-1/2 items-center">
-        <div className="px-1 sm:hidden md:hidden lg:flex xl:flex 2xl:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
+        <div className="px-1 hidden lg:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
           <Link
             target="_blank"
             href="https://www.linkedin.com/in/vaxojaniashvili/"
@@ -41,11 +41,11 @@ const HomePage = () => {
         </div>
       </div>
       <div className="flex justify-center w-1 items-center">
-        <div className="text-center flex flex-col gap-y-[30px]">
-          <h1 className="text-black font-bold text-[4rem] whitespace-nowrap">
+        <div className="text-center flex flex-col gap-y-[20px] md:gap-y-[30px]">
+          <h1 className="text-black font-bold text-[20px] sm:text-[30px] md:text-[50px] xl:text-[64px] whitespace-nowrap">
             Hey, I am VAXO JANIASHVILI
           </h1>
-          <p className="text-[1.2rem]">
+          <p className="lg:text-[1.2rem]">
             A Result-Oriented Web Developer building and managing Websites and
             Web Applications that leads to the success of the overall product
           </p>
@@ -55,6 +55,11 @@ const HomePage = () => {
             </button>
           </div>
         </div>
+        <img
+          className="w-[25px] h-[40px] absolute bottom-0 bg-transparent rounded-full hidden lg:flex"
+          src="https://cdn.dribbble.com/users/1459765/screenshots/3563580/scrolling_mousewheel.gif"
+          alt="img-gif"
+        />
       </div>
     </div>
   );
