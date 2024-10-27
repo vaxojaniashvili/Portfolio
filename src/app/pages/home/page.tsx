@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="flex w-full h-screen relative">
+    <div className="flex w-full h-[500px] md:h-screen relative">
       <div className="flex justify-start w-1/2 items-center">
         <div className="px-1 hidden lg:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
           <Link
@@ -41,8 +41,8 @@ const HomePage = () => {
         </div>
       </div>
       <div className="flex justify-center w-1 items-center">
-        <div className="text-center flex flex-col gap-y-[30px]">
-          <h1 className="text-black font-bold lg:text-[64px] text-[40px] whitespace-nowrap">
+        <div className="text-center flex flex-col gap-y-[20px] md:gap-y-[30px]">
+          <h1 className="text-black font-bold text-[20px] sm:text-[30px] md:text-[50px] xl:text-[64px] whitespace-nowrap">
             Hey, I am VAXO JANIASHVILI
           </h1>
           <p className="lg:text-[1.2rem]">
