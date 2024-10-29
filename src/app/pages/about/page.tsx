@@ -17,7 +17,7 @@ const AboutPage = () => {
                         I also like sharing content related to the stuff that I have learned over the years in <strong>Web Development</strong> so it can help other people in the Dev Community. Feel free to Connect or Follow me on my <a target="_blank" href="https://www.linkedin.com/in/vaxojaniashvili/" className="text-blue-500">LinkedIn</a> and <a target="_blank" href="https://www.instagram.com/vaxo_janiashvili1/" className="text-pink-500">Instagram</a> where I post useful content related to Web Development and Programming.
                     </p>
                     <p className="text-gray-700">
-                        I’m open to <strong>Job opportunities</strong> where I can contribute, learn and grow. If you have a good opportunity that matches my skills and experience, don't hesitate to <strong>contact</strong> me.
+                        I am open to <strong>Job opportunities</strong> where I can contribute, learn and grow. If you have a good opportunity that matches my skills and experience, do not hesitate to <strong>contact</strong> me.
                     </p>
                     <button className="mt-4 px-6 py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700">
                         Contact
