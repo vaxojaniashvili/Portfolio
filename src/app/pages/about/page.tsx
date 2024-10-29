@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutPage = () => {
     return (
-        <div className="bg-gray-100 w-full min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 gap-0 sm:gap-25">
+        <div id="about" className="bg-gray-100 w-full min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 gap-0 sm:gap-25">
             <div className="text-center mb-8 max-w-xl">
                 <h1 className="text-[40px] font-bold mb-2">ABOUT ME</h1>
                 <p className="text-gray-700">Here you will find more information about me, what I do, and my current skills mostly in terms of programming and technology.</p>
