@@ -3,6 +3,7 @@ import GithubIcon from "@/app/common/components/_atoms/assets/GithubIcon";
 import LinkeDinIcon from "@/app/common/components/_atoms/assets/LinkedinIcon";
 import YoutubeIcon from "@/app/common/components/_atoms/assets/YoutubeIcon";
 import Link from "next/link";
+import Image from "next/image";
 
 const HomePage = () => {
   return (
@@ -55,10 +56,12 @@ const HomePage = () => {
             </button>
           </div>
         </div>
-        <img
-          className="w-[25px] h-[40px] absolute bottom-0 bg-transparent rounded-full hidden lg:flex"
-          src="https://cdn.dribbble.com/users/1459765/screenshots/3563580/scrolling_mousewheel.gif"
-          alt="img-gif"
+        <Image
+            width={25}
+            height={40}
+            className="absolute bottom-0 bg-transparent rounded-full hidden lg:flex"
+            src="https://cdn.dribbble.com/users/1459765/screenshots/3563580/scrolling_mousewheel.gif"
+            alt="img-gif"
         />
       </div>
     </div>
