@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="flex w-full h-[500px] md:h-screen relative">
+    <div id="home" className="flex w-full h-[500px] md:h-screen relative">
       <div className="flex justify-start w-0 sm:w-1/2 items-center">
         <div className="px-1 hidden lg:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
           <Link

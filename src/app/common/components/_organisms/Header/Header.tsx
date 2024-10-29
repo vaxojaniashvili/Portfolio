@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import {AnimatePresence, motion} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import BurgerMenu from "../../_atoms/Icons/BurgerMenu";
 
@@ -8,9 +8,9 @@ const Header = () => {
   const [popUp, setPopUp] = useState(false);
 
   return (
-      <header className="relative">
+      <header className="fixed top-0 left-0 w-full z-50">
         <div className="w-full bg-white xl:h-[80px] h-[65px] flex items-center justify-between px-[30px] sm:px-5 md:px-10 lg:px-20">
-          <div className="flex items-center gap-3 xl:gap-4">
+          <div className="flex items-center gap-3 xl:gap-4 cursor-pointer">
             <Image
                 width={40}
                 height={40}
@@ -21,19 +21,15 @@ const Header = () => {
             <h1 className="font-body text-[14px] font-bold">VAXO JANIASHVILI</h1>
           </div>
           <div className="md:flex hidden gap-[30px] font-body font-bold text-[#333]">
-            <button className="hover:text-[#7843E9]">HOME</button>
-            <button className="hover:text-[#7843E9]">ABOUT</button>
-            <button className="hover:text-[#7843E9]">PROJECTS</button>
-            <button className="hover:text-[#7843E9]">CONTACT</button>
+            <a href="#home" className="hover:text-[#7843E9]">HOME</a>
+            <a href="#about" className="hover:text-[#7843E9]">ABOUT</a>
+            <a href="#projects" className="hover:text-[#7843E9]">PROJECTS</a>
+            <a href="#contact" className="hover:text-[#7843E9]">CONTACT</a>
           </div>
           {popUp ? (
-              <div className="md:hidden text-[30px]" onClick={() => {
-                setPopUp(!popUp);
-              }}>X</div>
+              <div className="md:hidden text-[30px]" onClick={() => setPopUp(!popUp)}>X</div>
           ) : (
-              <div onClick={() => {
-                setPopUp(!popUp);
-              }} className="md:hidden">
+              <div onClick={() => setPopUp(!popUp)} className="md:hidden">
                 <BurgerMenu className="w-[24px] h-[24px] lg:w-[30px] lg:h-[30px]" />
               </div>
           )}
@@ -43,13 +39,11 @@ const Header = () => {
                     initial={{ opacity: 0, y: -50, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -50, scale: 0.9 }}
-
-                    
                     transition={{
                       type: "spring",
                       stiffness: 100,
                       damping: 15,
-                      duration: 0.5
+                      duration: 0.5,
                     }}
                     className="absolute md:hidden z-[999] top-[60px] right-0 w-full bg-white text-gray-700 font-bold -tracking-normal"
                 >
