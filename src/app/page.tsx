@@ -5,7 +5,7 @@ import AboutPage from "./pages/about/page";
 import ContactPage from "./pages/contact/page";
 import Footer from "./pages/footer/page";
 import HomePage from "./pages/home/page";
-// import ProjectsPage from "./pages/projects/page"; esec aq
+import ProjectsPage from "./pages/projects/page";
 import { motion, useAnimation } from "framer-motion";
 import {ReactNode, useEffect} from "react";
 import { useInView } from "react-intersection-observer";
@@ -59,7 +59,12 @@ const Page = () => {
             </Section>
             {/*<Section>* aq davakomentare aq mitoro projectebis peijze ar mushaobs kargad da gasasworebelia axla agaraq framer-motion am divs/}
                 <ProjectsPage />
+
             {/*</Section>*/}
+            <div>
+                <ProjectsPage />
+            </div>
+
             <Section>
                 <ContactPage />
             </Section>
