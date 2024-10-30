@@ -71,16 +71,25 @@ const Header = () => {
                     className="absolute md:hidden z-[999] top-[60px] right-0 w-full bg-white text-gray-700 font-bold -tracking-normal"
                 >
                   <div className="w-full border py-6 px-3">
-                    <h1>HOME</h1>
+                    <a onClick={() => {
+                      setPopUp(!popUp)
+                    }} href="#home">HOME</a>
                   </div>
                   <div className="w-full border py-6 px-3">
-                    <h1>ABOUT</h1>
+                    <a onClick={() => {
+                      setPopUp(!popUp)
+
+                    }} href="#about">ABOUT</a>
                   </div>
                   <div className="w-full border py-6 px-3">
-                    <h1>PROJECTS</h1>
+                    <a onClick={() => {
+                      setPopUp(!popUp)
+                    }} href="#projects">PROJECTS</a>
                   </div>
                   <div className="w-full border py-6 px-3">
-                    <h1>CONTACT</h1>
+                    <a onClick={() => {
+                      setPopUp(!popUp)
+                    }} href="#contact">CONTACT</a>
                   </div>
                 </motion.div>
             )}
