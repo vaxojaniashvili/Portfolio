@@ -59,7 +59,7 @@ const HomePage = () => {
         <Image
             width={25}
             height={40}
-            className="absolute bottom-0 bg-transparent rounded-full hidden lg:flex"
+            className="absolute w-[25px] h-[40px] bottom-0 bg-transparent rounded-full hidden lg:flex"
             src="https://cdn.dribbble.com/users/1459765/screenshots/3563580/scrolling_mousewheel.gif"
             alt="img-gif"
         />
