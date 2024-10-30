@@ -10,7 +10,6 @@ const Header = () => {
   const controls = useAnimation();
 
   useEffect(() => {
-    // Animate the header on load
     controls.start("visible");
   }, [controls]);
 

@@ -30,6 +30,7 @@ const AboutPage = () => {
 
     return (
         <motion.div
+            id="about"
             ref={ref}
             className="bg-gray-100 w-full min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 gap-0 sm:gap-25"
             initial="hidden"
