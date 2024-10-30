@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const HomePage = () => {
   return (
-    <div id="home" className="flex w-full md:h-screen mb-[40px] py-[40px] mt-[100px] md:mb-0 md:mt-0 relative">
+    <div id="home" className="flex w-full md:h-screen mb-[40px] mt-[100px] md:mb-0 md:mt-0 relative">
       <div className="flex justify-start w-0 sm:w-1/2 items-center">
         <div className="px-1 hidden lg:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
           <Link
