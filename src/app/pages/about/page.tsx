@@ -59,7 +59,7 @@ const AboutPage = () => {
                     <p className="text-gray-700">
                         I am open to <strong>Job opportunities</strong> where I can contribute, learn and grow. If you have a good opportunity that matches my skills and experience, do not hesitate to <strong>contact</strong> me.
                     </p>
-                    <button className="mt-4 px-6 py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700">
+                    <button className="mt-4 px-6 w-full sm:w-auto py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700">
                         Contact
                     </button>
                 </motion.div>
