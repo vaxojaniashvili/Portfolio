@@ -1,14 +1,37 @@
-"use client";
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+'use client';
+
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 import BurgerMenu from "../../_atoms/Icons/BurgerMenu";
 
 const Header = () => {
   const [popUp, setPopUp] = useState(false);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    // Animate the header on load
+    controls.start("visible");
+  }, [controls]);
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  const menuVariants = {
+    hidden: { opacity: 0, y: -50, scale: 0.9 },
+    visible: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: -50, scale: 0.9 },
+  };
 
   return (
-      <header className="fixed top-0 left-0 w-full z-50">
+      <motion.header
+          className="fixed top-0 left-0 w-full z-50"
+          initial="hidden"
+          animate={controls}
+          variants={headerVariants}
+      >
         <div className="w-full bg-white xl:h-[80px] h-[65px] flex items-center justify-between px-[30px] sm:px-5 md:px-10 lg:px-20">
           <div className="flex items-center gap-3 xl:gap-4 cursor-pointer">
             <Image
@@ -36,9 +59,10 @@ const Header = () => {
           <AnimatePresence>
             {popUp && (
                 <motion.div
-                    initial={{ opacity: 0, y: -50, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -50, scale: 0.9 }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={menuVariants}
                     transition={{
                       type: "spring",
                       stiffness: 100,
@@ -63,7 +87,7 @@ const Header = () => {
             )}
           </AnimatePresence>
         </div>
-      </header>
+      </motion.header>
   );
 };
 
