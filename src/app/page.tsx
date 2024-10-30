@@ -57,9 +57,9 @@ const Page = () => {
             <Section>
                 <AboutPage />
             </Section>
-            <Section>
+            {/*<Section>* aq davakomentare aq mitoro projectebis peijze ar mushaobs kargad da gasasworebelia axla agaraq framer-motion am divs/}
                 <ProjectsPage />
-            </Section>
+            {/*</Section>*/}
             <Section>
                 <ContactPage />
             </Section>
