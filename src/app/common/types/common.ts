@@ -7,4 +7,5 @@ export interface BurgerMenuProps {
 
 export interface IconProps {
   className?: string;
+  view?:any
 }
