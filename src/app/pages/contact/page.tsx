@@ -1,6 +1,6 @@
 const ContactPage = () => {
   return (
-      <div className="min-h-screen bg-gray-300 flex flex-col items-center justify-center p-4 sm:p-8">
+      <div id="contact" className="min-h-screen bg-gray-300 flex flex-col items-center justify-center p-4 sm:p-8">
         <div className="flex p-4 sm:p-7">
           <h1 className="mx-auto text-[24px] sm:text-[30px] font-bold">CONTACT</h1>
         </div>
