@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="xl:flex xl:gap-0 text-white w-full justify-between py-[50px] grid gap-6">
         <div>
             <h1 className="text-white font-bold text-[25px]">VAXO JANIASHVILI</h1>
-            <p className="text-white w-full xl:w-[600px] text-[18px]">A Frontend focused Web Developer building the Frontend of Websites and
+            <p className="text-white w-full xl:w-[600px] text-[18px]">A Full-stack focused Web Developer building the Full-stack of Websites and
                 Web Applications that leads to the success of the overall product
             </p>
         </div>
