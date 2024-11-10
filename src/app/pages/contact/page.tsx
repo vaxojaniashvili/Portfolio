@@ -1,4 +1,12 @@
+"use client"
+import {useState} from "react";
+import Link from "next/link";
+
 const ContactPage = () => {
+  const [userName,setUserName] = useState('');
+  const [email,setEmail] = useState('');
+  const [text,setText] = useState('');
+
   return (
       <div id="contact" className="min-h-screen bg-gray-300 flex flex-col items-center justify-center p-4 sm:p-8">
         <div className="flex p-4 sm:p-7">
@@ -15,7 +23,9 @@ const ContactPage = () => {
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name
             </label>
-            <input
+            <input onChange={(e) => {
+              setUserName(e.target.value)
+            }}
                 className="shadow font-bold bg-[#f0f0f0] appearance-none border rounded w-full py-2 sm:py-4 px-3 text-[#333] leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
@@ -28,6 +38,9 @@ const ContactPage = () => {
               Email
             </label>
             <input
+                onChange={(e) => {
+                setEmail(e.target.value)}
+                }
                 className="shadow font-bold bg-[#f0f0f0] appearance-none border rounded w-full py-2 sm:py-4 px-3 text-[#333] leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
@@ -40,6 +53,9 @@ const ContactPage = () => {
               Message
             </label>
             <textarea
+                onChange={(e) => {
+                  setText(e.target.value)
+                }}
                 className="shadow py-2 sm:py-4 font-bold bg-[#f0f0f0] appearance-none border rounded w-full px-3 text-[#333] leading-tight focus:outline-none focus:shadow-outline h-[120px] sm:h-[180px]"
                 id="message"
                 placeholder="Enter Your Message"
@@ -47,16 +63,28 @@ const ContactPage = () => {
             />
           </div>
           <div className="flex items-center justify-center sm:justify-between">
-            <button
-                className="bg-[#7843E9] hover:bg-purple-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-5 rounded-xl focus:outline-none focus:shadow-outline"
-                type="submit"
-            >
-              Submit
-            </button>
+            {userName && email.includes("@") && text ? (
+                <Link href={"/pages/success"}>
+                  <button
+                      className="bg-[#7843E9] hover:bg-purple-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-5 rounded-xl focus:outline-none focus:shadow-outline"
+                      type="submit"
+                  >
+                    Submit
+                  </button>
+                </Link>
+            ) : (
+                <button
+                    className="bg-[#7843E9] hover:bg-purple-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-5 rounded-xl focus:outline-none focus:shadow-outline"
+                    type="submit"
+                >
+                  Submit
+                </button>
+            )}
           </div>
         </form>
       </div>
   );
 };
 
+// {name && email && text ? () : () }
 export default ContactPage;
