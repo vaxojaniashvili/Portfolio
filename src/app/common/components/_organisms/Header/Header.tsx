@@ -37,7 +37,7 @@ const Header = () => {
                 width={40}
                 height={40}
                 className="rounded-full"
-                src="https://lh3.googleusercontent.com/a/ACg8ocI1Bzymq6ysEqxe9Fu0yQLn-3wfEL4tPxH99YHKfWStRDg2xTSc=s288-c-no"
+                src="https://media.licdn.com/dms/image/v2/D4D03AQFD40IkU8Ub3w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1730895202711?e=1736985600&v=beta&t=x2hEgtCsKo9qGdAxbJyol8v88J-hIhUWqI3qm8ue71w"
                 alt="vaxo's-image"
             />
             <h1 className="font-body text-[14px] font-bold">VAXO JANIASHVILI</h1>
