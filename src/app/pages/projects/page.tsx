@@ -11,14 +11,6 @@ const ProjectsPage = () => {
       link: "https://ally.ge",
     },
     {
-      title: "Ecobazar",
-      description:
-        "Ecobazaar project where you can see products and add to cart so easly.",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJDt7-Lo_sHgebwAsGgJ1uTqHHljsg3oCnyg&s",
-      link: "https://shopping-app-taupe.vercel.app/",
-    },
-    {
       title: "Github users searcher",
       description:
         "This website is designed to support GitHub users and understand their public information.",
