@@ -41,10 +41,48 @@ const Section = ({ children } :SectionProps) => {
         </motion.div>
     );
 };
+const CursorEffect = () => {
+    useEffect(() => {
+        const cursor = document.createElement('div');
+        cursor.classList.add('cursor-follow');
+        document.body.appendChild(cursor);
 
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        const moveCursor = () => {
+            const distanceX = mouseX - cursorX;
+            const distanceY = mouseY - cursorY;
+            cursorX += distanceX * 0.25;
+            cursorY += distanceY * 0.25;
+
+            cursor.style.left = `${cursorX - cursor.offsetWidth / 2}px`;
+            cursor.style.top = `${cursorY - cursor.offsetHeight / 2}px`;
+
+            requestAnimationFrame(moveCursor);
+        };
+
+        const onMouseMove = (e: MouseEvent) => {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        moveCursor();
+
+        return () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.body.removeChild(cursor);
+        };
+    }, []);
+
+    return null; // Nothing to render
+};
 const Page = () => {
     return (
         <>
+            <CursorEffect/>
             <Header />
             <Section>
                 <HomePage />

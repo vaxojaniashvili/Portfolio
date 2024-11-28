@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap");
+/* Cursor animation class */
+    .cursor-follow {
+        @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
+    }
