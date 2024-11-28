@@ -57,9 +57,13 @@ const Page = () => {
             <Section>
                 <AboutPage />
             </Section>
-            <Section>
+            <motion.section
+            initial={{y:50}}
+            whileInView={{y:0}}
+            transition={{duration:1}}
+            >
                 <ProjectsPage />
-            </Section>
+            </motion.section>
 
             <Section>
                 <ContactPage />
