@@ -29,17 +29,12 @@ const Section = ({ children } :SectionProps) => {
         }
     }, [inView, controls]);
 
-    const variants = {
-        hidden: { opacity: 0, scale: 1 },
-        visible: { opacity: 1, scale: 1 },
-    };
 
     return (
         <motion.div
             ref={ref}
             initial="hidden"
             animate={controls}
-            variants={variants}
             transition={{ duration: 0.8, ease: "easeOut" }}
         >
             {children}
@@ -59,6 +54,8 @@ const Page = () => {
             </Section>
             <motion.section
             initial={{y:50}}
+
+
             whileInView={{y:0}}
             transition={{duration:1}}
             >

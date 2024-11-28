@@ -19,8 +19,8 @@ const AboutPage = () => {
     }, [inView, controls]);
 
     const containerVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, staggerChildren: 0.2 } }
+        hidden: { opacity: 0, y: 0 },
+        visible: { opacity: 1.5, y: 0, transition: { duration: 0.8, staggerChildren: 0.2 } }
     };
 
     const itemVariants = {
