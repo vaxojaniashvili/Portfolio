@@ -62,10 +62,11 @@ const ProjectsPage = () => {
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
             <Image
-              src={project.imageUrl}
-              alt={project.title}
-
-              className="w-full h-48 object-cover"
+                width={1200}
+                height={900}
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-48 object-cover"
             />
             <div className="p-6">
               <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
