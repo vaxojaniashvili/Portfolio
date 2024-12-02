@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const ProjectsPage = () => {
   const projects = [
@@ -60,9 +61,10 @@ const ProjectsPage = () => {
             key={index}
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
-            <img
+            <Image
               src={project.imageUrl}
               alt={project.title}
+
               className="w-full h-48 object-cover"
             />
             <div className="p-6">
