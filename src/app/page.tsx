@@ -6,41 +6,25 @@ import ContactPage from "./pages/contact/page";
 import Footer from "./pages/footer/page";
 import HomePage from "./pages/home/page";
 import ProjectsPage from "./pages/projects/page";
-import { motion, useAnimation } from "framer-motion";
-import {ReactNode, useEffect} from "react";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
+import { ReactNode, useEffect, useState } from "react";
 
 interface SectionProps {
     children: ReactNode;
 }
 
-const Section = ({ children } :SectionProps) => {
-    const controls = useAnimation();
-    const { ref, inView } = useInView({
-        triggerOnce: false,
-        threshold: 0.2,
-    });
-
-    useEffect(() => {
-        if (inView) {
-            controls.start("visible");
-        } else {
-            controls.start("hidden");
-        }
-    }, [inView, controls]);
-
-
+const Section = ({ children }: SectionProps) => {
     return (
         <motion.div
-            ref={ref}
-            initial="hidden"
-            animate={controls}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
         >
             {children}
         </motion.div>
     );
 };
+
 const CursorEffect = () => {
     useEffect(() => {
         const cursor = document.createElement('div');
@@ -77,12 +61,51 @@ const CursorEffect = () => {
         };
     }, []);
 
-    return null; // Nothing to render
+    return null;
 };
+
 const Page = () => {
+    const [showSplash, setShowSplash] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowSplash(false);
+        }, 3500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <>
-            <CursorEffect/>
+            {showSplash && (
+                <motion.div
+                    initial={{ x: "-100%" }}
+                    animate={{ x: 0 }}
+                    exit={{ x: "100%" }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 50,
+                        damping: 25,
+                        duration: 2,
+                    }}
+                    className="splash-screen"
+                >
+                    <div className="splash-background">
+                        <div className="splash-div white"></div>
+                        <div className="splash-div black"></div>
+                        <div className="splash-div white"></div>
+                    </div>
+                    <div className="rotating-image-container">
+                        <img
+                            src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif"
+                            alt="Rotating"
+                            className="rotating-image"
+                        />
+                    </div>
+                </motion.div>
+            )}
+
+            <CursorEffect />
             <Header />
             <Section>
                 <HomePage />
@@ -91,15 +114,12 @@ const Page = () => {
                 <AboutPage />
             </Section>
             <motion.section
-            initial={{y:50}}
-
-
-            whileInView={{y:0}}
-            transition={{duration:1}}
+                initial={{ y: 50 }}
+                whileInView={{ y: 0 }}
+                transition={{ duration: 1 }}
             >
                 <ProjectsPage />
             </motion.section>
-
             <Section>
                 <ContactPage />
             </Section>
