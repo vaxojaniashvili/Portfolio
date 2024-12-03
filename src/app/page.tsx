@@ -65,9 +65,14 @@ const CursorEffect = () => {
 };
 
 const Page = () => {
-    const [showSplash, setShowSplash] = useState(true);
+    const [showSplash, setShowSplash] = useState(false);
 
     useEffect(() => {
+        if (!sessionStorage.getItem('animationPlayed')) {
+            setShowSplash(true);
+            sessionStorage.setItem('animationPlayed', 'true');
+        }
+
         const timer = setTimeout(() => {
             setShowSplash(false);
         }, 3500);
