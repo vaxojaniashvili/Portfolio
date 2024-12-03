@@ -67,7 +67,7 @@ const AboutPage = () => {
                 <motion.div className="flex-1" variants={itemVariants}>
                     <h2 className="text-2xl font-bold mb-4">My Skills</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        {['HTML', 'CSS', 'JavaScript',"Typescript", 'React', 'Next',"Firebase", "Node.js", "express.js", "nest.js", 'PHP', "Laravel", 'SASS', 'GitHub', 'Git', 'SEO', "Linux", 'Terminal',"\n" +
+                        {['HTML', 'CSS', 'JavaScript',"Typescript", 'React', 'Next',"Firebase", "Node.js", "express.js", "nest.js", 'PHP', "Laravel", 'SASS', 'GitHub', 'Git',"Docker", 'SEO', "Linux", 'Terminal',"\n" +
                         "MongoDB","REST-API","GraphQL","Jira",].map(skill => (
                             <motion.span
                                 key={skill}
