@@ -6,6 +6,11 @@
     .cursor-follow {
         @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
     }
+    @media screen and (max-width: 1100px) {
+        .cursor-follow {
+            display: none;
+        }
+    }
 
 .splash-screen {
     position: fixed;
