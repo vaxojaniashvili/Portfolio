@@ -69,14 +69,12 @@ const AboutPage = () => {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         {['HTML', 'CSS', 'JavaScript',"Typescript", 'React', 'Next',"Firebase", "Node.js", "express.js", "nest.js", 'PHP', "Laravel", 'SASS', 'GitHub', 'Git',"Docker", 'SEO', "Linux", 'Terminal',"\n" +
                         "MongoDB","REST-API","GraphQL","Jira",].map(skill => (
-                            <motion.span
+                            <div
                                 key={skill}
                                 className="px-4 py-2 bg-gray-200 rounded text-center font-semibold hover:rounded-2xl text-gray-700 hover:bg-violet-700 cursor-pointer hover:text-white transition-all duration-500"
-                                whileHover={{ scale: 1.1 }}
-                                variants={itemVariants}
                             >
                                 {skill}
-                            </motion.span>
+                            </div>
                         ))}
                     </div>
                 </motion.div>
