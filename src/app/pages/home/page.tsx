@@ -54,15 +54,17 @@ const HomePage = () => {
             Web Applications that leads to the success of the overall product
           </p>
           <div className="w-full justify-center">
-            <button className="bg-[#7843E9] text-white w-[300px] py-3 rounded-xl">
-              PROJECTS
-            </button>
+            <a href="#projects">
+              <button className="bg-[#7843E9] text-white w-[300px] py-3 rounded-xl">
+                PROJECTS
+              </button>
+            </a>
           </div>
         </div>
         <Image
-          width={25}
-          height={40}
-          className="absolute w-[25px] h-[40px] bottom-0 bg-transparent rounded-full hidden lg:flex"
+            width={25}
+            height={40}
+            className="absolute w-[25px] h-[40px] bottom-0 bg-transparent rounded-full hidden lg:flex"
           src="https://cdn.dribbble.com/users/1459765/screenshots/3563580/scrolling_mousewheel.gif"
           alt="img-gif"
         />

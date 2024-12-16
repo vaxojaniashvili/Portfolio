@@ -32,7 +32,9 @@ const Header = () => {
           variants={headerVariants}
       >
         <div className="w-full bg-white xl:h-[80px] h-[65px] flex items-center justify-between px-[30px] sm:px-5 md:px-10 lg:px-20">
-          <div className="flex items-center gap-3 xl:gap-4 cursor-pointer">
+          <div onClick={() => {
+            location.href = "/"
+          }} className="flex items-center gap-3 xl:gap-4 cursor-pointer">
             <Image
                 width={40}
                 height={40}
