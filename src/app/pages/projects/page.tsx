@@ -17,7 +17,7 @@ const ProjectsPage = () => {
       "Altersend is an email automation platform that helps businesses efficiently send tailored messages to enhance customer engagement",
       imageUrl:
       "https://store-images.s-microsoft.com/image/apps.39915.794bb23d-d9af-471a-b1fd-eeaf6bdf28b2.b3512434-de33-4843-b660-9ea674f41778.9046a38e-fe6f-4385-9d5f-ff143fa0cf7b",
-      link: "#coming-soon",
+      link: "https://sendy.resoft.dev/",
     },
     {
       title: "Github users searcher",
