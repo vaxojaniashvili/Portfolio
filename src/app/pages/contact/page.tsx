@@ -8,14 +8,32 @@ const ContactPage = () => {
     const [text, setText] = useState('');
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (userName && email.includes("@") && text) {
-            const generatedId = Math.random().toString(36).substring(2, 15);
-            router.push(`/pages/success?id=${generatedId}`);
+            try {
+                const response = await fetch('/api/sendEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userName, email, text }),
+                });
+
+                if (response.ok) {
+                    const generatedId = Math.random().toString(36).substring(2, 15);
+                    router.push(`/pages/success?id=${generatedId}`);
+                } else {
+                    const data = await response.json();
+                    console.error('Error:', data.message);
+                    alert('Failed to send email. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An unexpected error occurred. Please try again.');
+            }
         }
     };
-
     return (
         <div id="contact" className="min-h-screen bg-gray-300 flex flex-col items-center justify-center p-4 sm:p-8">
             <div className="flex p-4 sm:p-7">
