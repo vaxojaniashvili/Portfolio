@@ -75,7 +75,7 @@ const Page = () => {
 
         const timer = setTimeout(() => {
             setShowSplash(false);
-        }, 3500);
+        }, 2500);
 
         return () => clearTimeout(timer);
     }, []);
