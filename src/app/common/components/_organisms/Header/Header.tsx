@@ -55,11 +55,11 @@ const Header = () => {
             <a href="#projects" className="hover:text-[#7843E9]">PROJECTS</a>
             <a href="#contact" className="hover:text-[#7843E9]">CONTACT</a>
           </div>
-          <div className="">
+          <div>
             {darkMode ? <LightMode onClick={toggleDarkMode} className="cursor-pointer"/> : (<DarkMode onClick={toggleDarkMode} className="cursor-pointer"/>)}
           </div>
           {popUp ? (
-              <div className={`md:hidden text-[30px] ${darkMode ? "text-white" : "text-white"}`} onClick={() => setPopUp(!popUp)}>X</div>
+              <div className={`md:hidden text-[30px] ${darkMode ? "text-white" : "text-black"}`} onClick={() => setPopUp(!popUp)}>X</div>
           ) : (
               <div onClick={() => setPopUp(!popUp)} className="md:hidden">
                 <BurgerMenu strokeColor={darkMode ? "white" : "black"} className="w-[24px] h-[24px] lg:w-[30px] lg:h-[30px]" />

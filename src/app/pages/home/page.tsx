@@ -1,3 +1,4 @@
+"use client"
 import FacebookIcon from "@/app/common/components/_atoms/assets/FacebookIcon";
 import GithubIcon from "@/app/common/components/_atoms/assets/GithubIcon";
 import LinkeDinIcon from "@/app/common/components/_atoms/assets/LinkedinIcon";
