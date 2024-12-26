@@ -8,6 +8,7 @@ import HomePage from "./pages/home/page";
 import ProjectsPage from "./pages/projects/page";
 import { motion } from "framer-motion";
 import { ReactNode, useEffect, useState } from "react";
+import useThemeStore from "@/app/store/useThemeStore";
 
 interface SectionProps {
     children: ReactNode;
@@ -79,6 +80,7 @@ const Page = () => {
 
         return () => clearTimeout(timer);
     }, []);
+    const darkMode:boolean = useThemeStore((store) => store.darkMode);
 
     return (
         <>
@@ -118,13 +120,19 @@ const Page = () => {
             <Section>
                 <AboutPage />
             </Section>
-            <motion.section
-                initial={{ y: 50 }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 1 }}
-            >
-                <ProjectsPage />
-            </motion.section>
+            {darkMode ? (
+                <Section>
+                    <ProjectsPage />
+                </Section>
+                ) : (
+                <motion.section
+                    initial={{ y: 50 }}
+                    whileInView={{ y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <ProjectsPage />
+                </motion.section>
+            )}
             <Section>
                 <ContactPage />
             </Section>
