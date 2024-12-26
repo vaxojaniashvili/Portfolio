@@ -19,7 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 subject: `New Contact Form Submission from ${userName}`,
                 text: `Message: ${text}\n\nFrom: ${userName} (${email})`,
             });
-
             res.status(200).json({ message: 'Email sent successfully' });
         } catch (error) {
             res.status(500).json({ message: 'Failed to send email', error });

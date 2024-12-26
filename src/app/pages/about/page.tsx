@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import useThemeStore from "@/app/store/useThemeStore";
+import {useRouter} from "next/navigation";
 
 const AboutPage = () => {
     const controls = useAnimation();
@@ -30,6 +31,7 @@ const AboutPage = () => {
     };
 
     const darkMode:boolean = useThemeStore((store) => store.darkMode);
+    const router = useRouter();
 
     return (
         <motion.div
@@ -61,7 +63,9 @@ const AboutPage = () => {
                     <p className={`${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"}`}>
                         I am open to <strong>Job opportunities</strong> where I can contribute, learn and grow. If you have a good opportunity that matches my skills and experience, do not hesitate to <strong>contact</strong> me.
                     </p>
-                    <button className="mt-4 px-6 w-full sm:w-auto py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700">
+                    <button onClick={() => {
+                        router.push("#contact")
+                    }} className="mt-4 px-6 w-full sm:w-auto py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700">
                         Contact
                     </button>
                 </motion.div>
