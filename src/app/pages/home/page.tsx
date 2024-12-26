@@ -1,15 +1,15 @@
-import FacebookIcon from "@/app/common/components/_atoms/assets/FacebookIcon";
-import GithubIcon from "@/app/common/components/_atoms/assets/GithubIcon";
-import LinkeDinIcon from "@/app/common/components/_atoms/assets/LinkedinIcon";
-import YoutubeIcon from "@/app/common/components/_atoms/assets/YoutubeIcon";
+"use client"
 import Link from "next/link";
 import Image from "next/image";
+import useThemeStore from "@/app/store/useThemeStore";
+import {FacebookIcon, GithubIcon, LinkeDinIcon, YoutubeIcon} from "@/app/common/components/_atoms/assets/common";
 
 const HomePage = () => {
+  const darkMode = useThemeStore((store) => store.darkMode)
   return (
     <div
       id="home"
-      className="flex w-full md:h-screen mb-[40px] mt-[100px] md:mb-0 md:mt-0 relative"
+      className={`flex w-full md:h-screen ${darkMode ? "bg-[#19191c]" : ""} pb-[40px] pt-[100px] md:mb-0 md:mt-0 relative`}
     >
       <div className="flex justify-start w-0 sm:w-1/2 items-center">
         <div className="px-1 hidden lg:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
@@ -46,10 +46,10 @@ const HomePage = () => {
       </div>
       <div className="flex justify-center w-full sm:w-1 mx-auto sm:mx-0 px-6 sm:px-0 items-center">
         <div className="text-center flex flex-col gap-y-[20px] md:gap-y-[30px]">
-          <h1 className="text-black font-bold text-[25px] sm:text-[30px] md:text-[50px] xl:text-[64px] whitespace-normal sm:whitespace-nowrap">
+          <h1 className={`text-black font-bold ${darkMode ? "text-white font-medium" : "text-black"} text-[25px] sm:text-[30px] md:text-[50px] xl:text-[64px] whitespace-normal sm:whitespace-nowrap`}>
             Hey, I am VAXO JANIASHVILI
           </h1>
-          <p className="lg:text-[1.2rem]">
+          <p className={`lg:text-[1.2rem] ${darkMode ? "text-[#F5F5F5] font-medium" : "text-black"}`}>
             A Result-Oriented Web Developer building and managing Websites and
             Web Applications that leads to the success of the overall product
           </p>

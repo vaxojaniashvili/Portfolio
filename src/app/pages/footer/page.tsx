@@ -17,10 +17,18 @@ const Footer = () => {
         <div>
             <h1 className="text-white font-bold">SOCIAL</h1>
             <div className="flex gap-4">
-                <LinkeDinIcon className="h-[30px] w-[30px]"/>
-                <YoutubeIcon view="footer" className="h-[30px] w-[30px]"/>
-                <GithubIcon className="h-[30px] w-[30px]"/>
-                <FacebookIcon className="h-[30px] w-[30px]"/>
+                <a target="_blank" href="https://www.linkedin.com/in/vaxojaniashvili/">
+                    <LinkeDinIcon className="h-[30px] w-[30px]"/>
+                </a>
+                <a target="_blank" href="https://www.youtube.com/@Vaxo-Janiashvili">
+                    <YoutubeIcon view="footer" className="h-[30px] w-[30px]"/>
+                </a>
+                <a target="_blank" href="https://github.com/vaxojaniashvili">
+                    <GithubIcon className="h-[30px] w-[30px]"/>
+                </a>
+                <a target="_blank" href="https://www.facebook.com/vaxo.janiashvilii">
+                    <FacebookIcon className="h-[30px] w-[30px]"/>
+                </a>
             </div>
         </div>
       </div>
