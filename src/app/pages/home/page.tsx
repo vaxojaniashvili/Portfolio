@@ -1,11 +1,8 @@
 "use client"
-import FacebookIcon from "@/app/common/components/_atoms/assets/FacebookIcon";
-import GithubIcon from "@/app/common/components/_atoms/assets/GithubIcon";
-import LinkeDinIcon from "@/app/common/components/_atoms/assets/LinkedinIcon";
-import YoutubeIcon from "@/app/common/components/_atoms/assets/YoutubeIcon";
 import Link from "next/link";
 import Image from "next/image";
 import useThemeStore from "@/app/store/useThemeStore";
+import {FacebookIcon, GithubIcon, LinkeDinIcon, YoutubeIcon} from "@/app/common/components/_atoms/assets/common";
 
 const HomePage = () => {
   const darkMode = useThemeStore((store) => store.darkMode)
