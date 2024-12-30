@@ -29,6 +29,11 @@ const Header = () => {
   const darkMode = useThemeStore((store) => store.darkMode)
 
   const toggleDarkMode = useThemeStore((store) => store.toggleDarkMode)
+  const { initializeTheme } = useThemeStore();
+
+  useEffect(() => {
+    initializeTheme();
+  }, [initializeTheme]);
   return (
       <motion.header
           className="fixed top-0 left-0 w-full z-50"
