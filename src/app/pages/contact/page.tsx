@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useThemeStore from "@/app/store/useThemeStore";
+import SubmitButton from "@/app/common/components/_molecules/Button/Button";
+import TextInput from "@/app/common/components/_molecules/Input/Input";
 
 const ContactPage = () => {
     const [userName, setUserName] = useState('');
@@ -99,7 +101,7 @@ const ContactPage = () => {
                     >
                         Name
                     </label>
-                    <input
+                    <TextInput
                         onChange={(e) => setUserName(e.target.value)}
                         className={`shadow font-bold appearance-none border rounded w-full py-2 sm:py-4 px-3 leading-tight focus:outline-none focus:shadow-outline ${
                             darkMode
@@ -121,7 +123,7 @@ const ContactPage = () => {
                     >
                         Email
                     </label>
-                    <input
+                    <TextInput
                         onChange={(e) => setEmail(e.target.value)}
                         className={`shadow font-bold appearance-none border rounded w-full py-2 sm:py-4 px-3 leading-tight focus:outline-none focus:shadow-outline ${
                             darkMode
@@ -156,7 +158,7 @@ const ContactPage = () => {
                     />
                 </div>
                 <div className="flex items-center justify-center sm:justify-between">
-                    <button
+                    <SubmitButton
                         disabled={isSubmitting}
                         className={`${
                             isSubmitting
@@ -166,7 +168,7 @@ const ContactPage = () => {
                         type="submit"
                     >
                         {isSubmitting ? "Submitting..." : "Submit"}
-                    </button>
+                    </SubmitButton>
                 </div>
                 {errorMessage && (
                     <p className="text-red-500 text-center mt-4">{errorMessage}</p>

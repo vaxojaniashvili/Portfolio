@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import useThemeStore from "@/app/store/useThemeStore";
 import {FacebookIcon, GithubIcon, LinkeDinIcon, YoutubeIcon} from "@/app/common/components/_atoms/assets/common";
+import SubmitButton from "@/app/common/components/_molecules/Button/Button";
 
 const HomePage = () => {
   const darkMode = useThemeStore((store) => store.darkMode)
@@ -55,9 +56,9 @@ const HomePage = () => {
           </p>
           <div className="w-full justify-center">
             <a href="#projects">
-              <button className="bg-[#7843E9] text-white w-[300px] py-3 rounded-xl">
+              <SubmitButton className="bg-[#7843E9] text-white w-[300px] py-3 rounded-xl">
                 PROJECTS
-              </button>
+              </SubmitButton>
             </a>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import useThemeStore from "@/app/store/useThemeStore";
 import {useRouter} from "next/navigation";
+import SubmitButton from "@/app/common/components/_molecules/Button/Button";
 
 const AboutPage = () => {
     const controls = useAnimation();
@@ -63,11 +64,11 @@ const AboutPage = () => {
                     <p className={`${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"}`}>
                         I am open to <strong>Job opportunities</strong> where I can contribute, learn and grow. If you have a good opportunity that matches my skills and experience, do not hesitate to <strong>contact</strong> me.
                     </p>
-                    <button onClick={() => {
+                    <SubmitButton onClick={() => {
                         router.push("#contact")
                     }} className="mt-4 px-6 w-full sm:w-auto py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700">
                         Contact
-                    </button>
+                    </SubmitButton>
                 </motion.div>
 
                 <motion.div className="flex-1" variants={itemVariants}>
