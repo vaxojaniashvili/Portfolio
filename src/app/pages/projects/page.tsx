@@ -49,7 +49,7 @@ const ProjectsPage = () => {
   const darkMode:boolean = useThemeStore((store) => store.darkMode);
 
   return (
-      <div className={`w-full ${darkMode ? "bg-[#19191c]" : ""}`}>
+      <div className={`w-full pb-[40px] ${darkMode ? "bg-[#19191c]" : ""}`}>
         <div id="projects" className="w-3/4 mx-auto">
           <div className="text-center mb-10">
             <h1 className={`text-3xl ${darkMode ? "text-white" : ""} font-bold pt-5`}>PROJECTS</h1>

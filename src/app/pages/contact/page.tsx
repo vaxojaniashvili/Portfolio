@@ -63,7 +63,7 @@ const ContactPage = () => {
         <div
             id="contact"
             className={`min-h-screen ${
-                darkMode ? "bg-[#17171c]" : "bg-gray-300"
+                darkMode ? "bg-[#17171c]" : "bg-gray-100"
             } flex flex-col items-center justify-center p-4 sm:p-8`}
         >
             <div className="flex p-4 sm:p-7">
