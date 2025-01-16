@@ -78,7 +78,7 @@ const AboutPage = () => {
                         "SQL","MongoDB","REST-API","GraphQL","Jira",].map(skill => (
                             <div
                                 key={skill}
-                                className={`px-4 py-2 ${darkMode ? "bg-gray-700 text-gray-200" : "bg-gray-200 text-gray-700"} rounded text-center font-semibold hover:rounded-2xl hover:bg-violet-700 cursor-pointer hover:text-white transition-all duration-500`}
+                                className={`px-4 whitespace-nowrap py-2 ${darkMode ? "bg-gray-700 text-gray-200" : "bg-gray-200 text-gray-700"} rounded text-center font-semibold hover:rounded-2xl hover:bg-violet-700 cursor-pointer hover:text-white transition-all duration-500`}
                             >
                                 {skill}
                             </div>
