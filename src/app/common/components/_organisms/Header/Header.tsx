@@ -49,7 +49,7 @@ const Header = () => {
                 width={40}
                 height={40}
                 className="rounded-full"
-                src="https://media.licdn.com/dms/image/v2/D4D03AQFD40IkU8Ub3w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1730895202711?e=1736985600&v=beta&t=x2hEgtCsKo9qGdAxbJyol8v88J-hIhUWqI3qm8ue71w"
+                src="https://media.licdn.com/dms/image/v2/D4D03AQFD40IkU8Ub3w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1730895202711?e=1743033600&v=beta&t=iNg6ShP_1D41dD170gxxSpfBEso6JSF_t_PFYysRftY"
                 alt="vaxo's-image"
             />
             <h1 className={`font-body text-[14px] ${darkMode ? "text-[#F5F5F5] font-normal" : "text-black"} font-bold`}>VAXO JANIASHVILI</h1>
