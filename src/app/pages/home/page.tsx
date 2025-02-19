@@ -51,8 +51,8 @@ const HomePage = () => {
             Hey, I am VAXO JANIASHVILI
           </h1>
           <p className={`lg:text-[1.2rem] ${darkMode ? "text-[#F5F5F5] font-medium" : "text-black"}`}>
-            A Result-Oriented Web Developer building and managing Websites and
-            Web Applications that leads to the success of the overall product
+            A Result-Oriented Web & Mobile Developer building and managing Websites and
+            Mobile Applications that leads to the success of the overall product
           </p>
           <div className="w-full justify-center">
             <a href="#projects">
