@@ -56,7 +56,7 @@ const AboutPage = () => {
                 <motion.div className="flex-1" variants={itemVariants}>
                     <h2 className={`text-2xl ${darkMode ? "text-white" : ""} font-bold mb-4`}>Get to know me!</h2>
                     <p className={`mb-4 ${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"}`}>
-                        I’m a <strong>full-stack Focused Web Developer</strong> building and managing the full-stack of Websites and Web Applications that leads to the success of the overall product. Check out some of my work in the <strong>Projects</strong> section.
+                        I’m a <strong>full-stack Focused Web & Mobile Developer</strong> building and managing the full-stack of Websites and Mobile Applications that leads to the success of the overall product. Check out some of my work in the <strong>Projects</strong> section.
                     </p>
                     <p className={`${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"} mb-4`}>
                         I also like sharing content related to the stuff that I have learned over the years in <strong>Web Development</strong> so it can help other people in the Dev Community. Feel free to Connect or Follow me on my <a target="_blank" href="https://www.linkedin.com/in/vaxojaniashvili/" className="text-blue-500">LinkedIn</a> and <a target="_blank" href="https://www.instagram.com/vaxo_janiashvili1/" className="text-pink-500">Instagram</a> where I post useful content related to Web Development and Programming.
