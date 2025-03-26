@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import useThemeStore from "@/app/store/useThemeStore";
@@ -9,26 +9,52 @@ import SubmitButton from "@/app/common/components/_molecules/Button/Button";
 const AboutPage = () => {
     const controls = useAnimation();
     const { ref, inView } = useInView({
-        triggerOnce: false,
-        threshold: 0.2,
+        triggerOnce: true,
+        threshold: 0.1,
     });
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        if (inView) {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isMobile) {
+            controls.start("visible");
+        } else if (inView) {
             controls.start("visible");
         } else {
             controls.start("hidden");
         }
-    }, [inView, controls]);
+    }, [inView, controls, isMobile]);
 
     const containerVariants = {
-        hidden: { opacity: 0, y: 0 },
-        visible: { opacity: 1.5, y: 0, transition: { duration: 0.8, staggerChildren: 0.2 } }
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: isMobile ? 0.3 : 0.1,
+                staggerChildren: isMobile ? 0.1 : 0.1,
+                when: "beforeChildren"
+            }
+        }
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+        hidden: { opacity: 0, y: isMobile ? 10 : 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: isMobile ? 0.2 : 0.5 }
+        }
     };
 
     const darkMode:boolean = useThemeStore((store) => store.darkMode);
@@ -39,8 +65,9 @@ const AboutPage = () => {
             id="about"
             ref={ref}
             className={`w-full ${darkMode ? "bg-[#17171c]" : "bg-gray-100"} min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 gap-0 sm:gap-25`}
-            initial="hidden"
+            initial={isMobile ? "visible" : "hidden"}
             animate={controls}
+            variants={containerVariants}
         >
             <motion.div className={`text-center ${darkMode ? "text-white" : ""} mb-8 max-w-xl`} variants={itemVariants}>
                 <h1 className={`text-[40px] font-bold mb-2`}>ABOUT ME</h1>
@@ -56,7 +83,7 @@ const AboutPage = () => {
                 <motion.div className="flex-1" variants={itemVariants}>
                     <h2 className={`text-2xl ${darkMode ? "text-white" : ""} font-bold mb-4`}>Get to know me!</h2>
                     <p className={`mb-4 ${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"}`}>
-                        I’m a <strong>full-stack Focused Web & Mobile Developer</strong> building and managing the full-stack of Websites and Mobile Applications that leads to the success of the overall product. Check out some of my work in the <strong>Projects</strong> section.
+                        I m a <strong>full-stack Focused Web & Mobile Developer</strong> building and managing the full-stack of Websites and Mobile Applications that leads to the success of the overall product. Check out some of my work in the <strong>Projects</strong> section.
                     </p>
                     <p className={`${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"} mb-4`}>
                         I also like sharing content related to the stuff that I have learned over the years in <strong>Web Development</strong> so it can help other people in the Dev Community. Feel free to Connect or Follow me on my <a target="_blank" href="https://www.linkedin.com/in/vaxojaniashvili/" className="text-blue-500">LinkedIn</a> and <a target="_blank" href="https://www.instagram.com/vaxo_janiashvili1/" className="text-pink-500">Instagram</a> where I post useful content related to Web Development and Programming.
@@ -74,8 +101,7 @@ const AboutPage = () => {
                 <motion.div className="flex-1" variants={itemVariants}>
                     <h2 className={`text-2xl ${darkMode ? "text-[#F5F5F5] font-normal" : "text-gray-700"} font-bold mb-4`}>My Skills</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        {['HTML', 'CSS', 'JavaScript',"Typescript", 'React',"React Native", 'Next',"Firebase", "Node.js", "Express.js", "Nest.js", 'PHP', "Laravel", 'SASS', 'GitHub', 'Git',"Docker", 'SEO', "Linux", 'Terminal',"\n" +
-                        "SQL","MongoDB","REST-API","GraphQL","Jira",].map(skill => (
+                        {['HTML', 'CSS', 'JavaScript',"Typescript", 'React',"React Native", 'Next',"Firebase", "Node.js", "Express.js", "Nest.js", 'PHP', "Laravel", 'SASS', 'GitHub', 'Git',"Docker", 'SEO', "Linux", 'Terminal', "SQL","MongoDB","REST-API","GraphQL","Jira"].map(skill => (
                             <div
                                 key={skill}
                                 className={`px-4 whitespace-nowrap py-2 ${darkMode ? "bg-gray-700 text-gray-200" : "bg-gray-200 text-gray-700"} rounded text-center font-semibold hover:rounded-2xl hover:bg-violet-700 cursor-pointer hover:text-white transition-all duration-500`}
@@ -87,7 +113,6 @@ const AboutPage = () => {
                 </motion.div>
             </motion.div>
         </motion.div>
-
     );
 }
 
