@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap");
+.cursor-follow {
+    @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
+}
+@media screen and (max-width: 1100px) {
     .cursor-follow {
-        @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
+        display: none;
     }
-    @media screen and (max-width: 1100px) {
-        .cursor-follow {
-            display: none;
-        }
-    }
+}
 
 .splash-screen {
     position: fixed;
@@ -108,4 +108,266 @@
     100% {
         opacity: 1;
     }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap");
+.cursor-follow {
+    @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
+}
+@media screen and (max-width: 1100px) {
+    .cursor-follow {
+        display: none;
+    }
+}
+
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    opacity: 1;
+    animation: fadeIn 3s ease-out forwards;
+}
+
+.splash-background {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.splash-div {
+    width: 33%;
+    height: 100%;
+    animation: slideIn 3s ease-in-out infinite;
+}
+
+.white {
+    background-color: white;
+    animation-delay: 0s;
+}
+
+.black {
+    background-color: black;
+    animation-delay: 1s;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.rotating-image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rotating-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: rotateImage 5s linear infinite;
+    border-radius: 50%;
+
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* დაამატეთ ეს სტილები თქვენს global.css ფაილში */
+
+/* ჩატბოტის ღილაკის ეფექტები */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+.chat-button-pulse {
+    animation: pulse 2s infinite;
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 1s steps(20, end);
+}
+
+.chat-bubble {
+    position: relative;
+}
+
+.chat-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg) translateY(70%);
+}
+
+.bot-bubble:after {
+    left: 10px;
+}
+
+.dark .bot-bubble:after {
+    background-color: #374151;
+}
+
+.user-bubble:after {
+    right: 10px;
+    background-color: #3b82f6;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+.chat-notification {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    border: 2px solid white;
+    animation: bounce 2s infinite;
+}
+
+/* გლობალურ CSS-ში დასამატებელი სტილები */
+
+/* კონტეინერების სქროლის ქცევის კონტროლი */
+#chat-messages-container,
+#chat-quick-questions-container {
+    overscroll-behavior: contain !important; /* აუცილებლად შეინარჩუნებს სქროლს კონტეინერის შიგნით */
+    -ms-overflow-style: none; /* IE-სთვის სქროლბარის დამალვა */
+    scrollbar-width: thin; /* Firefox-ისთვის თხელი სქროლბარი */
+}
+
+/* სქროლის ბარების გაფორმება */
+#chat-messages-container::-webkit-scrollbar,
+#chat-quick-questions-container::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#chat-messages-container::-webkit-scrollbar-thumb,
+#chat-quick-questions-container::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5); /* სქროლბარის ფერი */
+    border-radius: 3px;
+}
+
+#chat-messages-container::-webkit-scrollbar-track,
+#chat-quick-questions-container::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .chat-modal-container {
+        touch-action: none;
+    }
+
+    #chat-messages-container,
+    #chat-quick-questions-container {
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.chat-bubble {
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.chat-header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    touch-action: none;
+    user-select: none;
+}
+
+.chat-content-area {
+    isolation: isolate;
+    overscroll-behavior: contain;
 }
