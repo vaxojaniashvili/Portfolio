@@ -9,6 +9,8 @@ import ProjectsPage from "./pages/projects/page";
 import { motion } from "framer-motion";
 import { ReactNode, useEffect, useState } from "react";
 import useThemeStore from "@/app/store/useThemeStore";
+import {MessageCircle} from "lucide-react";
+import ChatModal from "@/app/common/components/_organisms/Chatbot/Chatbot";
 
 interface SectionProps {
     children: ReactNode;
@@ -67,6 +69,7 @@ const CursorEffect = () => {
 
 const Page = () => {
     const [showSplash, setShowSplash] = useState(false);
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     useEffect(() => {
         if (!sessionStorage.getItem('animationPlayed')) {
@@ -86,9 +89,9 @@ const Page = () => {
         <>
             {showSplash && (
                 <motion.div
-                    initial={{ x: "-100%" }}
-                    animate={{ x: 0 }}
-                    exit={{ x: "100%" }}
+                    initial={{x: "-100%"}}
+                    animate={{x: 0}}
+                    exit={{x: "100%"}}
                     transition={{
                         type: "spring",
                         stiffness: 50,
@@ -112,31 +115,44 @@ const Page = () => {
                 </motion.div>
             )}
 
-            <CursorEffect />
-            <Header />
+            <CursorEffect/>
+            <Header/>
             <Section>
-                <HomePage />
+                <HomePage/>
             </Section>
             <Section>
-                <AboutPage />
+                <AboutPage/>
             </Section>
             {darkMode ? (
                 <Section>
-                    <ProjectsPage />
+                    <ProjectsPage/>
                 </Section>
-                ) : (
+            ) : (
                 <motion.section
-                    initial={{ y: 50 }}
-                    whileInView={{ y: 0 }}
-                    transition={{ duration: 0.5 }}
+                    initial={{y: 50}}
+                    whileInView={{y: 0}}
+                    transition={{duration: 0.5}}
                 >
-                    <ProjectsPage />
+                    <ProjectsPage/>
                 </motion.section>
             )}
             <Section>
-                <ContactPage />
+                <ContactPage/>
             </Section>
-            <Footer />
+            <Footer/>
+            <motion.div
+                onClick={() => setIsChatOpen(!isChatOpen)}
+                className="fixed flex items-center justify-center w-[50px] h-[50px] rounded-full bottom-[20px] right-[20px] bg-blue-500 hover:bg-blue-600 text-white cursor-pointer z-20 shadow-lg transition-colors"
+                whileHover={{scale: 1.1}}
+                whileTap={{scale: 0.95}}
+            >
+                <MessageCircle size={24}/>
+            </motion.div>
+            <ChatModal
+                darkMode={darkMode}
+                isOpen={isChatOpen}
+                onClose={() => setIsChatOpen(false)}
+            />
         </>
     );
 };
