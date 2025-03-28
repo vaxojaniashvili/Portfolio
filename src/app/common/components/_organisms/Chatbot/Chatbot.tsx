@@ -3,40 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
-
-interface Message {
-    id: number;
-    text: string;
-    isBot: boolean;
-}
-
-interface QuickQuestion {
-    id: number;
-    text: string;
-}
-
-interface ChatModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    darkMode: boolean;
-}
-
-interface BotResponses {
-    hello: string;
-    skills: string;
-    experience: string;
-    contact: string;
-    projects: string;
-    process: string;
-    education: string;
-    technologies: string;
-    availability: string;
-    timeline: string;
-    pricing: string;
-    services: string;
-    default: string;
-    [key: string]: string;
-}
+import {BotResponses, ChatModalProps, QuickQuestion,Message} from "@/app/common/types/common";
 
 const botResponses:BotResponses = {
     hello: "გამარჯობა! რით შემიძლია დაგეხმაროთ?",

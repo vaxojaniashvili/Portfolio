@@ -26,3 +26,37 @@ export interface InputProps {
   id?: string;
   required?: boolean;
 }
+
+export interface Message {
+  id: number;
+  text: string;
+  isBot: boolean;
+}
+
+export interface QuickQuestion {
+  id: number;
+  text: string;
+}
+
+export interface ChatModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  darkMode: boolean;
+}
+
+export interface BotResponses {
+  hello: string;
+  skills: string;
+  experience: string;
+  contact: string;
+  projects: string;
+  process: string;
+  education: string;
+  technologies: string;
+  availability: string;
+  timeline: string;
+  pricing: string;
+  services: string;
+  default: string;
+  [key: string]: string;
+}
