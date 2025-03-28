@@ -7,7 +7,7 @@ import {BotResponses, ChatModalProps, QuickQuestion,Message} from "@/app/common/
 
 const botResponses:BotResponses = {
     hello: "გამარჯობა! რით შემიძლია დაგეხმაროთ?",
-    skills: "მე ვმუშაობ შემდეგი ტექნოლოგიებით: JavaScript, TypeScript, React,React-Native, Next.js, Node.js,PHP,Laravel Tailwind CSS და Framer Motion. გარდა ამისა, მაქვს გამოცდილება UI/UX დიზაინში.",
+    skills: "მე ვმუშაობ შემდეგი ტექნოლოგიებით: JavaScript, TypeScript, React,React-Native, Next.js, Node.js,PHP,Laravel Tailwind CSS და Framer Motion",
     experience: "მაქვს 1+ წლის გამოცდილება ვებ დეველოპმენტში. ვთანამშრომლობდი როგორც სტარტაპებთან, ასევე მსხვილ კომპანიებთან. ჩემი პორტფოლიო მოიცავს სხვადასხვა სფეროს პროექტებს, მათ შორის ელექტრონული კომერციის პლატფორმებს, დეშბორდებს და მობილურ აპლიკაციებს.",
     contact: "შეგიძლიათ დამიკავშირდეთ ელ-ფოსტაზე: vaxojaniashvili186@gmail.com, ან სოციალურ ქსელებში - LinkedIn, GitHub, Twitter. ასევე შეგიძლიათ შეავსოთ საკონტაქტო ფორმა ჩემი პორტფოლიოს ვებგვერდზე.",
     projects: "ჩემი პროექტები მოიცავს: 1) Alliance ის პროექტი რომლის ვებსაიტზეც ვმუშაობ  2) HotCard ის აპლიკაცია რომელიც არის ქართული პროექტი, 3) მობილური აპლიკაცია ProPay მოსწვალე-მასწავლებლისთვის. ყველა პროექტის დეტალები შეგიძლიათ იხილოთ პორტფოლიოს პროექტების განყოფილებაში.",
@@ -23,29 +23,45 @@ const botResponses:BotResponses = {
 const getBotResponse = (input:string) => {
     const lowerInput = input.toLowerCase();
 
-    if (lowerInput.includes('გამარჯობა') || lowerInput.includes('სალამი') || lowerInput.includes('hello') || lowerInput.includes('hi')) {
-        return botResponses.hello;
-    } else if (lowerInput.includes('უნარ') || lowerInput.includes('skill') || lowerInput.includes('შეგიძლია') || lowerInput.includes('ტექნოლოგიებ') || lowerInput.includes('ცოდნა')) {
-        return botResponses.skills;
-    } else if (lowerInput.includes('გამოცდილება') || lowerInput.includes('experience') || lowerInput.includes('მუშაობ')) {
-        return botResponses.experience;
-    } else if (lowerInput.includes('კონტაქტ') || lowerInput.includes('დაკავშირება') || lowerInput.includes('მეილი') || lowerInput.includes('ტელეფონი')) {
-        return botResponses.contact;
-    } else if (lowerInput.includes('პროექტ') || lowerInput.includes('project') || lowerInput.includes('ნამუშევრებ') || lowerInput.includes('პორტფოლიო')) {
-        return botResponses.projects;
-    } else if (lowerInput.includes('პროცეს') || lowerInput.includes('მეთოდოლოგია') || lowerInput.includes('როგორ მუშაობ')) {
-        return botResponses.process;
-    } else if (lowerInput.includes('განათლება') || lowerInput.includes('სწავლა') || lowerInput.includes('უნივერსიტეტი') || lowerInput.includes('education')) {
-        return botResponses.education;
-    } else if (lowerInput.includes('ტექნოლოგი') || lowerInput.includes('tech stack') || lowerInput.includes('framework') || lowerInput.includes('language')) {
-        return botResponses.technologies;
-    } else if (lowerInput.includes('ხელმისაწვდომ') || lowerInput.includes('თავისუფალი') || lowerInput.includes('availability') || lowerInput.includes('მიიღებ')) {
+    if (lowerInput.includes('ხელმისაწვდომ') || lowerInput.includes('თავისუფალი') ||
+        lowerInput.includes('availability') || lowerInput.includes('მიიღებ')) {
         return botResponses.availability;
-    } else if (lowerInput.includes('დრო') || lowerInput.includes('ვადა') || lowerInput.includes('timeline') || lowerInput.includes('როდის') || lowerInput.includes('ხანგრძლივობა')) {
+    }
+    else if (lowerInput.includes('გამარჯობა') || lowerInput.includes('სალამი') ||
+        lowerInput.includes('hello') || lowerInput.includes('hi')) {
+        return botResponses.hello;
+    } else if (lowerInput.includes('უნარ') || lowerInput.includes('skill') ||
+        lowerInput.includes('შეგიძლია') || lowerInput.includes('ტექნოლოგიებ') ||
+        lowerInput.includes('ცოდნა')) {
+        return botResponses.skills;
+    } else if (lowerInput.includes('გამოცდილება') || lowerInput.includes('experience') ||
+        lowerInput.includes('მუშაობ')) {
+        return botResponses.experience;
+    } else if (lowerInput.includes('კონტაქტ') || lowerInput.includes('დაკავშირება') ||
+        lowerInput.includes('მეილი') || lowerInput.includes('ტელეფონი')) {
+        return botResponses.contact;
+    } else if (lowerInput.includes('პროექტ') || lowerInput.includes('project') ||
+        lowerInput.includes('ნამუშევრებ') || lowerInput.includes('პორტფოლიო')) {
+        return botResponses.projects;
+    } else if (lowerInput.includes('პროცეს') || lowerInput.includes('მეთოდოლოგია') ||
+        lowerInput.includes('როგორ მუშაობ')) {
+        return botResponses.process;
+    } else if (lowerInput.includes('განათლება') || lowerInput.includes('სწავლა') ||
+        lowerInput.includes('უნივერსიტეტი') || lowerInput.includes('education')) {
+        return botResponses.education;
+    } else if (lowerInput.includes('ტექნოლოგი') || lowerInput.includes('tech stack') ||
+        lowerInput.includes('framework') || lowerInput.includes('language')) {
+        return botResponses.technologies;
+    } else if (lowerInput.includes('დრო') || lowerInput.includes('ვადა') ||
+        lowerInput.includes('timeline') || lowerInput.includes('როდის') ||
+        lowerInput.includes('ხანგრძლივობა')) {
         return botResponses.timeline;
-    } else if (lowerInput.includes('ფას') || lowerInput.includes('ღირებულება') || lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('რა ჯდება')) {
+    } else if (lowerInput.includes('ფას') || lowerInput.includes('ღირებულება') ||
+        lowerInput.includes('price') || lowerInput.includes('cost') ||
+        lowerInput.includes('რა ჯდება')) {
         return botResponses.pricing;
-    } else if (lowerInput.includes('სერვის') || lowerInput.includes('მომსახურება') || lowerInput.includes('რას აკეთებ') || lowerInput.includes('service')) {
+    } else if (lowerInput.includes('სერვის') || lowerInput.includes('მომსახურება') ||
+        lowerInput.includes('რას აკეთებ') || lowerInput.includes('service')) {
         return botResponses.services;
     } else {
         return botResponses.default;
@@ -69,7 +85,6 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps): JSX.Elem
     const chatRef = useRef<HTMLDivElement>(null);
     const [isMobile, setIsMobile] = useState(false);
 
-    // სქროლის პრევენცია
     const preventScroll = (e: WheelEvent) => {
         const element = e.currentTarget as HTMLElement;
         const scrollTop = element.scrollTop;
