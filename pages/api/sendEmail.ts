@@ -32,7 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         };
 
         try {
-            // Explicitly type the result
             const result = await ses.sendEmail(params).promise();
             console.log('SES email sent successfully:', result);
             res.status(200).json({ message: 'Email sent successfully', messageId: result.MessageId });
