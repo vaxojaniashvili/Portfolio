@@ -5,6 +5,8 @@ import { X, Send, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
 import {ChatModalProps,Message} from "@/app/common/types/common";
 import {getBotResponse, quickQuestions} from "@/app/common/components/_organisms/Chatbot/BotResponses";
+import ChatbotIcon from "../../_atoms/assets/ChatbotIcon.png";
+import Image from "next/image";
 
 
 export default function ChatModal({ isOpen, onClose }: ChatModalProps): JSX.Element | null {
@@ -176,7 +178,6 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps): JSX.Elem
                             </button>
                             <h3 className="font-semibold">ჩატი</h3>
                         </div>
-
                         <div
                             id="chat-messages-container"
                             className="flex-1 overflow-y-auto p-4 space-y-4 h-full"
@@ -186,11 +187,16 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps): JSX.Elem
                             {messages.map((message) => (
                                 <motion.div
                                     key={message.id}
-                                    className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+                                    className={`flex gap-2 ${message.isBot ? 'justify-start' : 'justify-end'}`}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.2 }}
                                 >
+                                    {message.isBot &&
+                                        <Image width={30} height={30} alt="123" className="w-[30px] h-[30px] rounded-full"
+                                               src={ChatbotIcon}
+                                               />
+                                    }
                                     <div
                                         className={`max-w-[80%] p-3 rounded-lg ${
                                             message.isBot
@@ -283,11 +289,16 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps): JSX.Elem
                             {messages.map((message) => (
                                 <motion.div
                                     key={message.id}
-                                    className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+                                    className={`flex gap-2 ${message.isBot ? 'justify-start' : 'justify-end'}`}
                                     initial={{opacity: 0, y: 10}}
                                     animate={{opacity: 1, y: 0}}
                                     transition={{duration: 0.2}}
                                 >
+                                    {message.isBot &&
+                                        <Image width={30} height={30} alt="123" className="w-[30px] h-[30px] rounded-full"
+                                               src={ChatbotIcon}
+                                        />
+                                    }
                                     <div
                                         className={`max-w-[90%] p-2 rounded-lg text-sm ${
                                             message.isBot
