@@ -11,7 +11,6 @@ const ContactPage = () => {
     const [text, setText] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const router = useRouter();
     const darkMode = useThemeStore((store) => store.darkMode);
 
@@ -19,7 +18,6 @@ const ContactPage = () => {
         e.preventDefault();
         setIsSubmitting(true);
         setErrorMessage('');
-        setSuccessMessage('');
 
         if (!email.includes("@") || email.split("@")[1].length < 3) {
             setErrorMessage("Please enter a valid email address.");
@@ -42,7 +40,6 @@ const ContactPage = () => {
             });
 
             if (response.ok) {
-                setSuccessMessage('Message sent successfully!');
                 const generatedId = Math.random().toString(36).substring(2, 15);
                 setTimeout(() => {
                     router.push(`/pages/success?id=${generatedId}`);
@@ -172,9 +169,6 @@ const ContactPage = () => {
                 </div>
                 {errorMessage && (
                     <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-                )}
-                {successMessage && (
-                    <p className="text-green-500 text-center mt-4">{successMessage}</p>
                 )}
             </form>
         </div>
