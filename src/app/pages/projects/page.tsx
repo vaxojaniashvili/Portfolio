@@ -28,7 +28,7 @@ const ProjectsPage = () => {
                                 height={900}
                                 src={project.imageUrl}
                                 alt={project.title}
-                                className="w-full h-48 object-cover"
+                                className="w-full h-48"
                             />
                             <div className="p-6 flex flex-col flex-grow">
                                 <h2 className={`text-xl ${darkMode ? "text-gray-200" : "text-black"} font-semibold mb-2`}>{project.title}</h2>
