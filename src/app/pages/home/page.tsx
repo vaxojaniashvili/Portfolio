@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <div
       id="home"
-      className={`flex w-full md:h-screen ${darkMode ? "bg-[#19191c]" : ""} pb-[40px] pt-[100px] md:mb-0 md:mt-0 relative`}
+      className={`flex w-full md:h-screen ${darkMode ? "bg-[#19191c]" : "bg-gray-200"} pb-[40px] pt-[100px] md:mb-0 md:mt-0 relative`}
     >
       <div className="flex justify-start w-0 sm:w-1/2 items-center">
         <div className="px-1 hidden lg:flex flex-col justify-between py-3 h-[275px] bg-white rounded">
