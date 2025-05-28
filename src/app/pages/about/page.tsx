@@ -108,7 +108,8 @@ const AboutPage = () => {
               Get to know me!
             </h2>
             <p className={`mb-4 ${subtitleColorClass}`}>
-              I m a <strong>full-stack Focused Web & Mobile Developer</strong>{" "}
+              I m a{" "}
+              <strong>Mobile Enginner and Full-Stack Web Developer</strong>
               building and managing the full-stack of Websites and Mobile
               Applications that leads to the success of the overall product.
               Check out some of my work in the <strong>Projects</strong>{" "}
@@ -129,7 +130,7 @@ const AboutPage = () => {
               and{" "}
               <a
                 target="_blank"
-                href="https://www.instagram.com/vaxo_janiashvili1/"
+                href="https://www.instagram.com/janiashvili_1"
                 className="text-pink-500"
               >
                 Instagram
