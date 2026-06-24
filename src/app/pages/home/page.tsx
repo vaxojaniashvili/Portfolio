@@ -7,7 +7,6 @@ import {
   FacebookIcon,
   GithubIcon,
   LinkeDinIcon,
-  YoutubeIcon,
 } from "@/app/common/components/_atoms/assets/common";
 import profileImage from "@/app/common/components/_atoms/assets/heroImage.jpeg";
 
@@ -21,11 +20,6 @@ const socials = [
     href: "https://github.com/vaxojaniashvili",
     label: "GitHub",
     Icon: GithubIcon,
-  },
-  {
-    href: "https://www.youtube.com/@Vaxo-Janiashvili",
-    label: "YouTube",
-    Icon: YoutubeIcon,
   },
   {
     href: "https://www.facebook.com/vaxo.janiashvilii",
@@ -149,19 +143,29 @@ const HomePage = () => {
 
           {/* Socials */}
           <div className="mt-8 flex items-center justify-center md:justify-start gap-3">
+            <span
+              className={`text-xs font-medium uppercase tracking-widest ${
+                darkMode ? "text-gray-500" : "text-gray-400"
+              }`}
+            >
+              Connect
+            </span>
+            <span
+              className={`h-px w-8 ${darkMode ? "bg-gray-700" : "bg-gray-300"}`}
+            />
             {socials.map(({ href, label, Icon }) => (
               <Link
                 key={label}
                 href={href}
                 target="_blank"
                 aria-label={label}
-                className={`grid h-11 w-11 place-items-center rounded-full transition-all hover:-translate-y-1 ${
+                className={`group grid h-9 w-9 place-items-center rounded-lg border transition-all hover:-translate-y-0.5 hover:border-[#7843E9] hover:bg-[#7843E9] hover:shadow-lg hover:shadow-purple-500/30 ${
                   darkMode
-                    ? "bg-white/5 hover:bg-[#7843e933]"
-                    : "bg-white shadow-sm hover:bg-purple-50"
+                    ? "border-gray-700/70 text-gray-400 hover:text-white"
+                    : "border-gray-200 text-gray-500 hover:text-white"
                 }`}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-[18px] h-[18px]" />
               </Link>
             ))}
           </div>
