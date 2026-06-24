@@ -1,129 +1,109 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import useThemeStore from "@/app/store/useThemeStore";
-import { useRouter } from "next/navigation";
-import SubmitButton from "@/app/common/components/_molecules/Button/Button";
+
+const skillGroups: { title: string; skills: string[] }[] = [
+  {
+    title: "Frontend",
+    skills: ["HTML", "CSS", "SASS", "JavaScript", "TypeScript", "React", "Next.js"],
+  },
+  {
+    title: "Mobile",
+    skills: ["React Native", "Expo", "Expo CLI", "EAS Build", "Firebase"],
+  },
+  {
+    title: "Backend",
+    skills: ["Node.js", "Express.js", "Nest.js", "PHP", "Laravel", "REST API", "GraphQL"],
+  },
+  {
+    title: "Databases & Tools",
+    skills: ["SQL", "MongoDB", "Docker", "Git", "GitHub", "Linux", "Jira", "SEO"],
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, when: "beforeChildren" },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 const AboutPage = () => {
-  const controls = useAnimation();
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-  const [isMobile, setIsMobile] = useState(false);
   const darkMode = useThemeStore((store) => store.darkMode);
-  const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
-    setHasMounted(true);
-
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) {
-      controls.start("visible");
-    } else if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [inView, controls, isMobile]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: isMobile ? 0.3 : 0.1,
-        staggerChildren: isMobile ? 0.1 : 0.15,
-        when: "beforeChildren",
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: isMobile ? 10 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: isMobile ? 0.2 : 0.5 },
-    },
-  };
-
-  const router = useRouter();
-
-  if (!hasMounted) {
-    return (
-      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 gap-0 sm:gap-25 bg-opacity-0"></div>
-    );
-  }
-
-  const bgColorClass = darkMode ? "bg-[#17171c]" : "bg-gray-100";
-  const textColorClass = darkMode ? "text-white" : "text-gray-700";
-  const subtitleColorClass = darkMode
-    ? "text-[#F5F5F5] font-normal"
-    : "text-gray-700";
-  const skillBgClass = darkMode
-    ? "bg-gray-700 text-gray-200"
-    : "bg-gray-200 text-gray-700";
+  const sectionBg = darkMode ? "bg-[#141418]" : "bg-white";
+  const heading = darkMode ? "text-white" : "text-gray-900";
+  const body = darkMode ? "text-gray-400" : "text-gray-600";
+  const cardBg = darkMode
+    ? "bg-white/5 border-white/10"
+    : "bg-gray-50 border-gray-100";
 
   return (
-    <div id="about" className={`w-full ${bgColorClass} min-h-screen`}>
+    <section id="about" className={`relative w-full ${sectionBg} py-24`}>
       <motion.div
-        ref={ref}
-        className="w-full flex flex-col items-center justify-center p-4 sm:p-8 gap-0 sm:gap-25"
-        initial={isMobile ? "visible" : "hidden"}
-        animate={controls}
+        className="mx-auto w-full max-w-6xl px-6 sm:px-10"
         variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
       >
-        <motion.div
-          className={`text-center ${textColorClass} mb-8 max-w-xl`}
-          variants={itemVariants}
-        >
-          <h1 className={`text-[40px] font-bold mb-2`}>ABOUT ME</h1>
-          <p className={textColorClass}>
-            Here you will find more information about me, what I do, and my
-            current skills mostly in terms of programming and technology.
+        {/* Heading */}
+        <motion.div variants={itemVariants} className="text-center mb-16">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#7843E9]">
+            Get to know me
+          </p>
+          <h2 className={`mt-3 text-3xl sm:text-4xl font-bold ${heading}`}>
+            About Me
+          </h2>
+          <p className={`mt-4 max-w-2xl mx-auto text-base sm:text-lg ${body}`}>
+            More about who I am, what I do, and the technologies I work with
+            across web and mobile.
           </p>
         </motion.div>
 
-        <motion.div
-          className="flex flex-col md:flex-row gap-20 max-w-4xl w-full"
-          variants={containerVariants}
-        >
-          <motion.div className="flex-1" variants={itemVariants}>
-            <h2 className={`text-2xl ${textColorClass} font-bold mb-4`}>
-              Get to know me!
-            </h2>
-            <p className={`mb-4 ${subtitleColorClass}`}>
-              I m a{" "}
-              <strong>Mobile Enginner and Full-Stack Web Developer</strong>
-              building and managing the full-stack of Websites and Mobile
-              Applications that leads to the success of the overall product.
-              Check out some of my work in the <strong>Projects</strong>{" "}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Bio */}
+          <motion.div variants={itemVariants} className="space-y-5">
+            <h3 className={`text-2xl font-bold ${heading}`}>
+              Building products that matter
+            </h3>
+            <p className={`leading-relaxed ${body}`}>
+              I&apos;m a{" "}
+              <strong className={darkMode ? "text-gray-200" : "text-gray-800"}>
+                React Native Developer and Full-Stack Web Engineer
+              </strong>{" "}
+              with{" "}
+              <strong className={darkMode ? "text-gray-200" : "text-gray-800"}>
+                4 years of experience
+              </strong>{" "}
+              building cross-platform mobile apps with React Native &amp; the
+              Expo CLI, and managing the full stack of web applications that
+              lead to the success of the overall product. Check out some of my
+              work in the{" "}
+              <Link href="#projects" className="text-[#7843E9] font-medium hover:underline">
+                Projects
+              </Link>{" "}
               section.
             </p>
-            <p className={`${subtitleColorClass} mb-4`}>
-              I also like sharing content related to the stuff that I have
-              learned over the years in <strong>Web Development</strong> so it
-              can help other people in the Dev Community. Feel free to Connect
-              or Follow me on my{" "}
+            <p className={`leading-relaxed ${body}`}>
+              I also enjoy sharing what I&apos;ve learned over the years in{" "}
+              <strong className={darkMode ? "text-gray-200" : "text-gray-800"}>
+                Web Development
+              </strong>{" "}
+              to help others in the dev community. Feel free to connect with me
+              on{" "}
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/vaxojaniashvili/"
-                className="text-blue-500"
+                className="text-[#7843E9] font-medium hover:underline"
               >
                 LinkedIn
               </a>{" "}
@@ -131,73 +111,62 @@ const AboutPage = () => {
               <a
                 target="_blank"
                 href="https://www.instagram.com/janiashvili_1"
-                className="text-pink-500"
+                className="text-[#7843E9] font-medium hover:underline"
               >
                 Instagram
-              </a>{" "}
-              where I post useful content related to Web Development and
-              Programming.
+              </a>
+              .
             </p>
-            <p className={subtitleColorClass}>
-              I am open to <strong>Job opportunities</strong> where I can
-              contribute, learn and grow. If you have a good opportunity that
-              matches my skills and experience, do not hesitate to{" "}
-              <strong>contact</strong> me.
+            <p className={`leading-relaxed ${body}`}>
+              I&apos;m open to{" "}
+              <strong className={darkMode ? "text-gray-200" : "text-gray-800"}>
+                job opportunities
+              </strong>{" "}
+              where I can contribute, learn, and grow. If you have a role that
+              matches my skills and experience, don&apos;t hesitate to reach out.
             </p>
-            <SubmitButton
-              onClick={() => {
-                router.push("#contact");
-              }}
-              className="mt-4 px-6 w-full sm:w-auto py-2 bg-purple-600 text-white font-bold rounded hover:bg-purple-700"
+            <Link
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-xl bg-[#7843E9] px-7 py-3 font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:bg-[#6a35d6] hover:-translate-y-0.5"
             >
-              Contact
-            </SubmitButton>
+              Contact me
+            </Link>
           </motion.div>
 
-          <motion.div className="flex-1" variants={itemVariants}>
-            <h2 className={`text-2xl ${subtitleColorClass} font-bold mb-4`}>
-              My Skills
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "Typescript",
-                "React",
-                "React Native",
-                "Next",
-                "Firebase",
-                "Node.js",
-                "Express.js",
-                "Nest.js",
-                "PHP",
-                "Laravel",
-                "SASS",
-                "GitHub",
-                "Git",
-                "Docker",
-                "SEO",
-                "Linux",
-                "Terminal",
-                "SQL",
-                "MongoDB",
-                "REST-API",
-                "GraphQL",
-                "Jira",
-              ].map((skill) => (
-                <div
-                  key={skill}
-                  className={`px-4 whitespace-nowrap py-2 ${skillBgClass} rounded text-center font-semibold hover:rounded-2xl hover:bg-violet-700 cursor-pointer hover:text-white transition-all duration-500`}
+          {/* Skills */}
+          <motion.div variants={itemVariants} className="space-y-6">
+            {skillGroups.map((group) => (
+              <div
+                key={group.title}
+                className={`rounded-2xl border p-5 ${cardBg}`}
+              >
+                <h4
+                  className={`mb-3 text-sm font-semibold uppercase tracking-wider ${
+                    darkMode ? "text-gray-400" : "text-gray-500"
+                  }`}
                 >
-                  {skill}
+                  {group.title}
+                </h4>
+                <div className="flex flex-wrap gap-2.5">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`rounded-lg px-3.5 py-1.5 text-sm font-medium transition-all duration-300 cursor-default hover:bg-[#7843E9] hover:text-white hover:-translate-y-0.5 ${
+                        darkMode
+                          ? "bg-white/5 text-gray-300"
+                          : "bg-white text-gray-700 shadow-sm"
+                      }`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </motion.div>
-        </motion.div>
+        </div>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

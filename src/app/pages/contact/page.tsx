@@ -1,178 +1,223 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import useThemeStore from "@/app/store/useThemeStore";
-import SubmitButton from "@/app/common/components/_molecules/Button/Button";
-import TextInput from "@/app/common/components/_molecules/Input/Input";
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ContactPage = () => {
-    const [userName, setUserName] = useState('');
-    const [email, setEmail] = useState('');
-    const [text, setText] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    const router = useRouter();
-    const darkMode = useThemeStore((store) => store.darkMode);
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [text, setText] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+  const darkMode = useThemeStore((store) => store.darkMode);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setErrorMessage('');
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMessage("");
 
-        if (!email.includes("@") || email.split("@")[1].length < 3) {
-            setErrorMessage("Please enter a valid email address.");
-            setIsSubmitting(false);
-            return;
-        }
-        if (text.length < 10) {
-            setErrorMessage("Message must be at least 10 characters long.");
-            setIsSubmitting(false);
-            return;
-        }
+    if (userName.trim().length < 2) {
+      setErrorMessage("Please enter your name.");
+      return;
+    }
+    if (!EMAIL_REGEX.test(email.trim())) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+    if (text.trim().length < 10) {
+      setErrorMessage("Message must be at least 10 characters long.");
+      return;
+    }
 
-        try {
-            const response = await fetch('/api/sendEmail', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userName, email, text }),
-            });
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userName, email, text }),
+      });
 
-            if (response.ok) {
-                const generatedId = Math.random().toString(36).substring(2, 15);
-                setTimeout(() => {
-                    router.push(`/pages/success?id=${generatedId}`);
-                }, 1000);
-            } else {
-                const data = await response.json();
-                setErrorMessage(data.message || 'Failed to send email.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            setErrorMessage('An unexpected error occurred. Please try again.');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+      if (response.ok) {
+        const generatedId = Math.random().toString(36).substring(2, 15);
+        router.push(`/pages/success?id=${generatedId}`);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        setErrorMessage(data.message || "Failed to send email.");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("An unexpected error occurred. Please try again.");
+      setIsSubmitting(false);
+    }
+  };
 
-    return (
-        <div
-            id="contact"
-            className={`min-h-screen ${
-                darkMode ? "bg-[#17171c]" : "bg-gray-100"
-            } flex flex-col items-center justify-center p-4 sm:p-8`}
-        >
-            <div className="flex p-4 sm:p-7">
-                <h1
-                    className={`mx-auto ${
-                        darkMode ? "text-[#F5F5F5]" : ""
-                    } text-[24px] sm:text-[30px] font-bold`}
-                >
-                    CONTACT
-                </h1>
-            </div>
-            <div className="flex flex-wrap mb-4 sm:mb-8">
-                <p
-                    className={`mx-auto ${
-                        darkMode ? "text-[#F5F5F5]" : "text-[#333]"
-                    } text-lg sm:text-2xl font-medium text-center`}
-                >
-                    Feel free to contact me by submitting the form below and I will
-                    get back to <br className="hidden sm:block" /> you as soon as
-                    possible
-                </p>
-            </div>
-            <form
-                onSubmit={handleSubmit}
-                className={`w-full max-w-[90%] sm:max-w-[850px] ${
-                    darkMode ? "bg-[#2a2a35]" : "bg-white"
-                } shadow-md rounded px-4 sm:px-8 pt-6 pb-8 mb-4`}
-            >
-                <div className="mb-4">
-                    <label
-                        className={`block ${
-                            darkMode ? "text-[#F5F5F5]" : "text-gray-700"
-                        } text-sm font-bold mb-2`}
-                        htmlFor="name"
-                    >
-                        Name
-                    </label>
-                    <TextInput
-                        onChange={(e) => setUserName(e.target.value)}
-                        className={`shadow font-bold appearance-none border rounded w-full py-2 sm:py-4 px-3 leading-tight focus:outline-none focus:shadow-outline ${
-                            darkMode
-                                ? "bg-[#2a2a35] text-[#f5f5f5] placeholder-gray-400 border-gray-600"
-                                : "bg-[#f0f0f0] text-[#333]"
-                        }`}
-                        id="name"
-                        type="text"
-                        placeholder="Enter Your Name"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        className={`block ${
-                            darkMode ? "text-[#F5F5F5]" : "text-gray-700"
-                        } text-sm font-bold mb-2`}
-                        htmlFor="email"
-                    >
-                        Email
-                    </label>
-                    <TextInput
-                        onChange={(e) => setEmail(e.target.value)}
-                        className={`shadow font-bold appearance-none border rounded w-full py-2 sm:py-4 px-3 leading-tight focus:outline-none focus:shadow-outline ${
-                            darkMode
-                                ? "bg-[#2a2a35] text-[#f5f5f5] placeholder-gray-400 border-gray-600"
-                                : "bg-[#f0f0f0] text-[#333]"
-                        }`}
-                        id="email"
-                        type="email"
-                        placeholder="Enter Your Email"
-                        required
-                    />
-                </div>
-                <div className="mb-6">
-                    <label
-                        className={`block ${
-                            darkMode ? "text-[#F5F5F5]" : "text-gray-700"
-                        } text-sm font-bold mb-2`}
-                        htmlFor="message"
-                    >
-                        Message
-                    </label>
-                    <textarea
-                        onChange={(e) => setText(e.target.value)}
-                        className={`shadow py-2 sm:py-4 font-bold appearance-none border rounded w-full px-3 leading-tight focus:outline-none focus:shadow-outline h-[120px] sm:h-[180px] ${
-                            darkMode
-                                ? "bg-[#2a2a35] text-[#f5f5f5] placeholder-gray-400 border-gray-600"
-                                : "bg-[#f0f0f0] text-[#333]"
-                        }`}
-                        id="message"
-                        placeholder="Enter Your Message"
-                        required
-                    />
-                </div>
-                <div className="flex items-center justify-center sm:justify-between">
-                    <SubmitButton
-                        disabled={isSubmitting}
-                        className={`${
-                            isSubmitting
-                                ? "bg-gray-500"
-                                : "bg-[#7843E9] hover:bg-purple-700"
-                        } text-white font-bold py-2 sm:py-3 px-4 sm:px-5 rounded-xl focus:outline-none focus:shadow-outline`}
-                        type="submit"
-                    >
-                        {isSubmitting ? "Submitting..." : "Submit"}
-                    </SubmitButton>
-                </div>
-                {errorMessage && (
-                    <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-                )}
-            </form>
+  const sectionBg = darkMode ? "bg-[#141418]" : "bg-white";
+  const heading = darkMode ? "text-white" : "text-gray-900";
+  const body = darkMode ? "text-gray-400" : "text-gray-600";
+  const label = darkMode ? "text-gray-300" : "text-gray-700";
+  const fieldClass = `w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#7843E9]/60 ${
+    darkMode
+      ? "bg-[#1a1a20] border-white/10 text-gray-100 placeholder-gray-500"
+      : "bg-gray-50 border-gray-200 text-gray-800 placeholder-gray-400"
+  }`;
+
+  const contactInfo = [
+    {
+      label: "Email",
+      value: "vaxojaniashvili186@gmail.com",
+      href: "mailto:vaxojaniashvili186@gmail.com",
+    },
+    {
+      label: "LinkedIn",
+      value: "in/vaxojaniashvili",
+      href: "https://www.linkedin.com/in/vaxojaniashvili/",
+    },
+    {
+      label: "GitHub",
+      value: "@vaxojaniashvili",
+      href: "https://github.com/vaxojaniashvili",
+    },
+  ];
+
+  return (
+    <section
+      id="contact"
+      className={`w-full ${sectionBg} py-24`}
+    >
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+        <div className="text-center mb-16">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#7843E9]">
+            Contact
+          </p>
+          <h2 className={`mt-3 text-3xl sm:text-4xl font-bold ${heading}`}>
+            Let&apos;s work together
+          </h2>
+          <p className={`mt-4 max-w-2xl mx-auto text-base sm:text-lg ${body}`}>
+            Have a project in mind or an opportunity to discuss? Send me a
+            message and I&apos;ll get back to you as soon as possible.
+          </p>
         </div>
-    );
+
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+          {/* Contact info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-2 space-y-6"
+          >
+            <h3 className={`text-xl font-bold ${heading}`}>Get in touch</h3>
+            <p className={`leading-relaxed ${body}`}>
+              I&apos;m currently open to new opportunities and collaborations.
+              Whether you have a question or just want to say hi, my inbox is
+              always open.
+            </p>
+            <div className="space-y-4">
+              {contactInfo.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className={`flex flex-col rounded-xl border p-4 transition-all hover:-translate-y-0.5 ${
+                    darkMode
+                      ? "border-white/10 bg-white/5 hover:border-[#7843E9]/50"
+                      : "border-gray-100 bg-gray-50 hover:border-[#7843E9]/40"
+                  }`}
+                >
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#7843E9]">
+                    {item.label}
+                  </span>
+                  <span className={`mt-1 text-sm font-medium ${heading}`}>
+                    {item.value}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Form */}
+          <motion.form
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            onSubmit={handleSubmit}
+            className={`lg:col-span-3 rounded-2xl border p-6 sm:p-8 shadow-sm ${
+              darkMode ? "border-white/10 bg-[#1a1a20]" : "border-gray-100 bg-gray-50"
+            }`}
+          >
+            <div className="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label htmlFor="name" className={`mb-2 block text-sm font-medium ${label}`}>
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className={fieldClass}
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className={`mb-2 block text-sm font-medium ${label}`}>
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={fieldClass}
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+            <div className="mt-5">
+              <label htmlFor="message" className={`mb-2 block text-sm font-medium ${label}`}>
+                Message
+              </label>
+              <textarea
+                id="message"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className={`${fieldClass} h-40 resize-none`}
+                placeholder="Tell me about your project or opportunity..."
+                required
+              />
+            </div>
+
+            {errorMessage && (
+              <p className="mt-4 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-500">
+                {errorMessage}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`mt-6 w-full rounded-xl px-6 py-3.5 font-semibold text-white shadow-lg shadow-purple-500/25 transition-all ${
+                isSubmitting
+                  ? "cursor-not-allowed bg-gray-500"
+                  : "bg-[#7843E9] hover:bg-[#6a35d6] hover:-translate-y-0.5"
+              }`}
+            >
+              {isSubmitting ? "Sending..." : "Send message"}
+            </button>
+          </motion.form>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default ContactPage;

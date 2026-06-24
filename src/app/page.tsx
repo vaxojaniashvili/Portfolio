@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Header from "./common/components/_organisms/Header/Header";
 import AboutPage from "./pages/about/page";
@@ -6,155 +6,143 @@ import ContactPage from "./pages/contact/page";
 import Footer from "./pages/footer/page";
 import HomePage from "./pages/home/page";
 import ProjectsPage from "./pages/projects/page";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useEffect, useState } from "react";
 import useThemeStore from "@/app/store/useThemeStore";
-import {MessageCircle} from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import ChatModal from "@/app/common/components/_organisms/Chatbot/Chatbot";
 
 interface SectionProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
-const Section = ({ children }: SectionProps) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-        >
-            {children}
-        </motion.div>
-    );
-};
+const Section = ({ children }: SectionProps) => (
+  <motion.section
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.05 }}
+    transition={{ duration: 0.6 }}
+  >
+    {children}
+  </motion.section>
+);
 
 const CursorEffect = () => {
-    useEffect(() => {
-        const cursor = document.createElement('div');
-        cursor.classList.add('cursor-follow');
-        document.body.appendChild(cursor);
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
+    const cursor = document.createElement("div");
+    cursor.classList.add("cursor-follow");
+    document.body.appendChild(cursor);
 
-        const moveCursor = () => {
-            const distanceX = mouseX - cursorX;
-            const distanceY = mouseY - cursorY;
-            cursorX += distanceX * 0.25;
-            cursorY += distanceY * 0.25;
+    let mouseX = 0,
+      mouseY = 0;
+    let cursorX = 0,
+      cursorY = 0;
+    let raf = 0;
 
-            cursor.style.left = `${cursorX - cursor.offsetWidth / 2}px`;
-            cursor.style.top = `${cursorY - cursor.offsetHeight / 2}px`;
+    const moveCursor = () => {
+      cursorX += (mouseX - cursorX) * 0.2;
+      cursorY += (mouseY - cursorY) * 0.2;
+      cursor.style.left = `${cursorX - cursor.offsetWidth / 2}px`;
+      cursor.style.top = `${cursorY - cursor.offsetHeight / 2}px`;
+      raf = requestAnimationFrame(moveCursor);
+    };
 
-            requestAnimationFrame(moveCursor);
-        };
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
 
-        const onMouseMove = (e: MouseEvent) => {
-            mouseX = e.pageX;
-            mouseY = e.pageY;
-        };
+    document.addEventListener("mousemove", onMouseMove);
+    moveCursor();
 
-        document.addEventListener('mousemove', onMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(raf);
+      cursor.remove();
+    };
+  }, []);
 
-        moveCursor();
-
-        return () => {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.body.removeChild(cursor);
-        };
-    }, []);
-
-    return null;
+  return null;
 };
 
 const Page = () => {
-    const [showSplash, setShowSplash] = useState(false);
-    const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const darkMode = useThemeStore((store) => store.darkMode);
 
-    useEffect(() => {
-        if (!sessionStorage.getItem('animationPlayed')) {
-            setShowSplash(true);
-            sessionStorage.setItem('animationPlayed', 'true');
-        }
+  useEffect(() => {
+    // Show the loader only on the first visit of the session.
+    if (sessionStorage.getItem("animationPlayed")) {
+      setShowSplash(false);
+      return;
+    }
+    sessionStorage.setItem("animationPlayed", "true");
+    const timer = setTimeout(() => setShowSplash(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
-        const timer = setTimeout(() => {
-            setShowSplash(false);
-        }, 2500);
+  return (
+    <>
+      <AnimatePresence>
+        {showSplash && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="splash-screen"
+          >
+            <div className="splash-background">
+              <div className="splash-div white" />
+              <div className="splash-div black" />
+              <div className="splash-div white" />
+            </div>
+            <div className="rotating-image-container">
+              <img
+                src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif"
+                alt="Loading"
+                className="rotating-image"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        return () => clearTimeout(timer);
-    }, []);
-    const darkMode:boolean = useThemeStore((store) => store.darkMode);
+      <CursorEffect />
+      <Header />
+      <main>
+        <HomePage />
+        <Section>
+          <AboutPage />
+        </Section>
+        <Section>
+          <ProjectsPage />
+        </Section>
+        <Section>
+          <ContactPage />
+        </Section>
+      </main>
+      <Footer />
 
-    return (
-        <>
-            {showSplash && (
-                <motion.div
-                    initial={{x: "-100%"}}
-                    animate={{x: 0}}
-                    exit={{x: "100%"}}
-                    transition={{
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 25,
-                        duration: 2,
-                    }}
-                    className="splash-screen"
-                >
-                    <div className="splash-background">
-                        <div className="splash-div white"></div>
-                        <div className="splash-div black"></div>
-                        <div className="splash-div white"></div>
-                    </div>
-                    <div className="rotating-image-container">
-                        <img
-                            src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif"
-                            alt="Rotating"
-                            className="rotating-image"
-                        />
-                    </div>
-                </motion.div>
-            )}
+      <motion.button
+        onClick={() => setIsChatOpen((v) => !v)}
+        aria-label="Open chat"
+        className="chat-button-pulse fixed bottom-5 right-5 z-30 grid h-14 w-14 place-items-center rounded-full bg-[#7843E9] text-white shadow-lg transition-colors hover:bg-[#6a35d6]"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <MessageCircle size={24} />
+      </motion.button>
 
-            <CursorEffect/>
-            <Header/>
-            <Section>
-                <HomePage/>
-            </Section>
-            <Section>
-                <AboutPage/>
-            </Section>
-            {darkMode ? (
-                <Section>
-                    <ProjectsPage/>
-                </Section>
-            ) : (
-                <motion.section
-                    initial={{y: 50}}
-                    whileInView={{y: 0}}
-                    transition={{duration: 0.5}}
-                >
-                    <ProjectsPage/>
-                </motion.section>
-            )}
-            <Section>
-                <ContactPage/>
-            </Section>
-            <Footer/>
-            <motion.div
-                onClick={() => setIsChatOpen(!isChatOpen)}
-                className="fixed flex items-center justify-center w-[50px] h-[50px] rounded-full bottom-[20px] right-[20px] bg-blue-500 hover:bg-blue-600 text-white cursor-pointer z-20 shadow-lg transition-colors"
-                whileHover={{scale: 1.1}}
-                whileTap={{scale: 0.95}}
-            >
-                <MessageCircle size={24}/>
-            </motion.div>
-            <ChatModal
-                darkMode={darkMode}
-                isOpen={isChatOpen}
-                onClose={() => setIsChatOpen(false)}
-            />
-        </>
-    );
+      <ChatModal
+        darkMode={darkMode}
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+      />
+    </>
+  );
 };
 
 export default Page;

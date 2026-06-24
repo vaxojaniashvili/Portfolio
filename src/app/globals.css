@@ -3,371 +3,322 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap");
-.cursor-follow {
-    @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
-}
-@media screen and (max-width: 1100px) {
-    .cursor-follow {
-        display: none;
-    }
+
+/* ──────────────────────────────────────────────
+   Design tokens & base
+   ────────────────────────────────────────────── */
+:root {
+  --brand: #7843e9;
+  --brand-light: #9d5cff;
+  --brand-dark: #5b27c4;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(120, 67, 233, 0.3);
+}
+
+/* Global scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--brand), var(--brand-dark));
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-light);
+}
+
+/* ──────────────────────────────────────────────
+   Reusable utilities
+   ────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-light), var(--brand));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+}
+
+/* Animated gradient blobs used in section backgrounds */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
+}
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+.animate-bounce-down {
+  animation: bounceDown 1.6s ease-in-out infinite;
+}
+
+/* ──────────────────────────────────────────────
+   Custom cursor (desktop only)
+   ────────────────────────────────────────────── */
+.cursor-follow {
+  @apply fixed w-10 h-10 cursor-none rounded-full pointer-events-none transition-transform duration-100 ease-out z-[9998];
+  background: radial-gradient(
+    circle,
+    rgba(120, 67, 233, 0.6),
+    rgba(120, 67, 233, 0.15)
+  );
+  mix-blend-mode: screen;
+}
+@media screen and (max-width: 1100px) {
+  .cursor-follow {
+    display: none;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Splash screen
+   ────────────────────────────────────────────── */
 .splash-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-    text-align: center;
-    color: white;
-    font-size: 2rem;
-    opacity: 1;
-    animation: fadeIn 3s ease-out forwards;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.96);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
 }
 
 .splash-background {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .splash-div {
-    width: 33%;
-    height: 100%;
-    animation: slideIn 3s ease-in-out infinite;
+  width: 33%;
+  height: 100%;
+  animation: slideIn 3s ease-in-out infinite;
 }
 
 .white {
-    background-color: white;
-    animation-delay: 0s;
+  background-color: white;
+  animation-delay: 0s;
 }
-
 .black {
-    background-color: black;
-    animation-delay: 1s;
+  background-color: black;
+  animation-delay: 1s;
 }
 
 @keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-    50% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
-.rotating-image-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.rotating-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    animation: rotateImage 5s linear infinite;
-    border-radius: 50%;
-
-}
-
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-    50% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap");
-.cursor-follow {
-    @apply absolute w-10 h-10 cursor-none rounded-full bg-[#7843E9] pointer-events-none transition-all duration-100 ease-out transform;
-}
-@media screen and (max-width: 1100px) {
-    .cursor-follow {
-        display: none;
-    }
-}
-
-.splash-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-    text-align: center;
-    color: white;
-    font-size: 2rem;
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
-    animation: fadeIn 3s ease-out forwards;
-}
-
-.splash-background {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.splash-div {
-    width: 33%;
-    height: 100%;
-    animation: slideIn 3s ease-in-out infinite;
-}
-
-.white {
-    background-color: white;
-    animation-delay: 0s;
-}
-
-.black {
-    background-color: black;
-    animation-delay: 1s;
-}
-
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-    50% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+  }
 }
 
 .rotating-image-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rotating-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    animation: rotateImage 5s linear infinite;
-    border-radius: 50%;
-
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: rotateImage 5s linear infinite;
+  border-radius: 50%;
 }
 
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-    50% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+@keyframes rotateImage {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* დაამატეთ ეს სტილები თქვენს global.css ფაილში */
-
-/* ჩატბოტის ღილაკის ეფექტები */
+/* ──────────────────────────────────────────────
+   Chatbot
+   ────────────────────────────────────────────── */
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-    }
+  0% {
+    box-shadow: 0 0 0 0 rgba(120, 67, 233, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(120, 67, 233, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(120, 67, 233, 0);
+  }
 }
-
 .chat-button-pulse {
-    animation: pulse 2s infinite;
-}
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+  animation: pulse 2s infinite;
 }
 
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
 .typing-animation {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 1s steps(20, end);
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s steps(20, end);
 }
 
 .chat-bubble {
-    position: relative;
+  position: relative;
+  overflow: hidden;
 }
-
-.chat-bubble:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 10px;
-    height: 10px;
-    transform: rotate(45deg) translateY(70%);
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg) translateY(70%);
 }
-
 .bot-bubble:after {
-    left: 10px;
+  left: 10px;
 }
-
 .dark .bot-bubble:after {
-    background-color: #374151;
+  background-color: #374151;
 }
-
 .user-bubble:after {
-    right: 10px;
-    background-color: #3b82f6;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-5px);
-    }
-    60% {
-        transform: translateY(-3px);
-    }
+  right: 10px;
+  background-color: var(--brand);
 }
 
 .chat-notification {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #ef4444;
-    border: 2px solid white;
-    animation: bounce 2s infinite;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  border: 2px solid white;
 }
 
-/* გლობალურ CSS-ში დასამატებელი სტილები */
-
-/* კონტეინერების სქროლის ქცევის კონტროლი */
 #chat-messages-container,
 #chat-quick-questions-container {
-    overscroll-behavior: contain !important; /* აუცილებლად შეინარჩუნებს სქროლს კონტეინერის შიგნით */
-    -ms-overflow-style: none; /* IE-სთვის სქროლბარის დამალვა */
-    scrollbar-width: thin; /* Firefox-ისთვის თხელი სქროლბარი */
+  overscroll-behavior: contain !important;
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
 }
-
-/* სქროლის ბარების გაფორმება */
 #chat-messages-container::-webkit-scrollbar,
 #chat-quick-questions-container::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  width: 6px;
+  height: 6px;
 }
-
 #chat-messages-container::-webkit-scrollbar-thumb,
 #chat-quick-questions-container::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.5); /* სქროლბარის ფერი */
-    border-radius: 3px;
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
 }
-
 #chat-messages-container::-webkit-scrollbar-track,
 #chat-quick-questions-container::-webkit-scrollbar-track {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 @media (max-width: 768px) {
-    .chat-modal-container {
-        touch-action: none;
-    }
-
-    #chat-messages-container,
-    #chat-quick-questions-container {
-        touch-action: pan-y;
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-.chat-bubble {
-    position: relative;
-    overflow: hidden;
-}
-
-.chat-bubble::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.05);
-    pointer-events: none;
+  .chat-modal-container {
+    touch-action: none;
+  }
+  #chat-messages-container,
+  #chat-quick-questions-container {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .chat-header {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    touch-action: none;
-    user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  touch-action: none;
+  user-select: none;
 }
 
 .chat-content-area {
-    isolation: isolate;
-    overscroll-behavior: contain;
+  isolation: isolate;
+  overscroll-behavior: contain;
 }
