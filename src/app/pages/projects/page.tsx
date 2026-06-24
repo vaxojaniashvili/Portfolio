@@ -41,15 +41,14 @@ const ProjectsPage = () => {
               transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
               className={`group card-hover flex flex-col overflow-hidden rounded-2xl border ${cardBg} shadow-sm hover:shadow-2xl hover:shadow-purple-500/10`}
             >
-              <div className="relative h-52 w-full overflow-hidden">
+              <div className="relative aspect-square w-full overflow-hidden">
                 <Image
                   width={1200}
                   height={900}
                   src={project.imageUrl}
                   alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </div>
 
               <div className="flex flex-1 flex-col p-6">
